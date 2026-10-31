@@ -1,19 +1,22 @@
-/* Operation Barnabas International. Palette taken from "The Faithful Shepherd": sky, slate, olive grass, and the flame. */
+/* Operation Barnabas International. Clean warm white with deep colors from the painting and the field:
+   forest green (the grass), terracotta (the flame and the saris), and warm charcoal. */
 :root{
-  --bg:#f7f5f0;--surface:#fff;--sand:#e9ecf1;--ink:#2a2722;--muted:#5e5a52;
-  --accent:#3d5578;--accent-hover:#2f4563;--flame:#9c2f2f;--label:#5c6340;--line:#e2e0d8;
-  --button:#3d5578;--button-hover:#2f4563;--on-button:#fff;
-  --footer-bg:#24261d;--footer-ink:#e9ebe0;--footer-muted:#b0b39c;--footer-line:#3d4033;--on-dark-accent:#bccae0;
-  --hero-from:#e4e9f1;--hero-to:#f7f5f0;--shadow:0 18px 40px -18px rgba(36,38,29,.45);
+  --bg:#faf7f2;--surface:#fff;--sand:#f2ede4;--ink:#2b2622;--muted:#6b5f55;
+  --accent:#a63d24;--accent-hover:#86301b;--flame:#a63d24;--label:#3b5a2f;--line:#e7e0d4;
+  --button:#3b5a2f;--button-hover:#2f4a25;--on-button:#fff;
+  --band-green:#3b5a2f;--band-green-ink:#f6f1e6;--band-terra:#a63d24;--band-terra-ink:#fff;
+  --footer-bg:#2b2622;--footer-ink:#ece4d8;--footer-muted:#b3a797;--footer-line:#453d36;--on-dark-accent:#c7d6a8;
+  --hero-from:#faf7f2;--hero-to:#faf7f2;--shadow:0 18px 40px -18px rgba(60,35,15,.45);
   --wide:1200px;--read:720px;--gutter:clamp(16px,4vw,48px);
   --serif:'Fraunces',Georgia,serif;--sans:'Source Sans 3',system-ui,sans-serif;
 }
 :root[data-theme="dark"]{
-  --bg:#1c1d18;--surface:#25271f;--sand:#2b2e26;--ink:#f0eee6;--muted:#b6b3a6;
-  --accent:#a9bbd8;--accent-hover:#c7d4e8;--flame:#ee8f7c;--label:#b9c17f;--line:#3a3d33;
-  --button:#a9bbd8;--button-hover:#c7d4e8;--on-button:#1b1d16;
-  --footer-bg:#141510;--footer-ink:#e9ebe0;--footer-muted:#a4a796;--footer-line:#33362c;--on-dark-accent:#bccae0;
-  --hero-from:#232a33;--hero-to:#1c1d18;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
+  --bg:#1d1916;--surface:#27211d;--sand:#2e2722;--ink:#f1e9de;--muted:#b8ab9b;
+  --accent:#f08e70;--accent-hover:#f5ad96;--flame:#f08e70;--label:#9cc27f;--line:#3d342d;
+  --button:#9cc27f;--button-hover:#b5d49d;--on-button:#1d1916;
+  --band-green:#2c4223;--band-green-ink:#eef3e6;--band-terra:#7e2f1c;--band-terra-ink:#fbeee8;
+  --footer-bg:#141110;--footer-ink:#ece4d8;--footer-muted:#a89c8d;--footer-line:#352e28;--on-dark-accent:#c7d6a8;
+  --hero-from:#1d1916;--hero-to:#1d1916;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -99,16 +102,20 @@ main{flex:1}
 @media(max-width:800px){.pillars{grid-template-columns:1fr}.pillars article{padding:28px 24px}.pillar-photo{width:calc(100% + 48px);margin:-28px -24px 24px}}
 
 /* Email sign-up: the primary call to action */
-.subscribe{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;background:var(--sand);border-radius:16px;padding:44px 48px;border-top:4px solid var(--button)}
+.subscribe{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;background:var(--band-green);color:var(--band-green-ink);border-radius:16px;padding:44px 48px}
 .home-page main>section.subscribe{width:calc(100% - 2*var(--gutter));max-width:calc(var(--wide) - 2*var(--gutter));margin-bottom:88px;padding:44px 48px}
 .subscribe h2{margin:6px 0 10px}
-.subscribe p{margin:0;color:var(--muted)}
+.subscribe p{margin:0;color:var(--band-green-ink)}
+.subscribe .eyebrow{color:var(--band-green-ink);opacity:.85}
+.subscribe .button{background:var(--band-green-ink);border-color:var(--band-green-ink);color:var(--band-green)}
+.subscribe .button:hover{background:#fff;border-color:#fff;color:var(--band-green)}
+.subscribe-row input{border-color:transparent}
 .prose .subscribe{margin:32px 0 40px;grid-template-columns:1fr;gap:20px;padding:32px}
 .prose .subscribe h2{font-size:30px;margin-top:6px}
 .subscribe-row{display:flex;gap:10px}
 .subscribe-row input{flex:1;min-width:0;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
 .subscribe-status{min-height:1.4em;margin:10px 0 0!important;font-size:16px}
-.subscribe-status[data-state="success"]{color:var(--label);font-weight:600}
+.subscribe-status[data-state="success"]{color:inherit;font-weight:600}
 .subscribe-status[data-state="error"]{color:#b3261e}
 :root[data-theme="dark"] .subscribe-status[data-state="error"]{color:#f2a49b}
 @media(max-width:800px){.subscribe,.home-page main>section.subscribe{grid-template-columns:1fr;gap:20px;padding:28px 24px}}
@@ -126,9 +133,9 @@ main{flex:1}
 .wide-photo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 
 /* Home: triage quote, voices, latest */
-.home-page .triage{max-width:none;background:var(--sand);padding:80px var(--gutter);text-align:center}
+.home-page .triage{max-width:none;background:var(--band-terra);color:var(--band-terra-ink);padding:80px var(--gutter);text-align:center}
 .triage blockquote{max-width:880px;margin:0 auto;font-size:clamp(24px,3vw,34px);line-height:1.35}
-.triage .cite{font:600 15px var(--sans);letter-spacing:.01em;color:var(--label);margin:24px 0 0}
+.triage .cite{font:600 15px var(--sans);letter-spacing:.01em;color:var(--band-terra-ink);margin:24px 0 0}
 .voices{padding-top:88px;padding-bottom:40px}
 .voices ul{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .voices li{border-top:3px solid var(--label);padding-top:20px}
