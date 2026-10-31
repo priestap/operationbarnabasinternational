@@ -72,6 +72,9 @@ main{flex:1}
 .home-page .hero{max-width:none;background:linear-gradient(180deg,var(--hero-from),var(--hero-to));padding:56px max(var(--gutter),calc((100% - var(--wide))/2 + var(--gutter))) 88px;display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center}
 .hero h1{font-size:clamp(38px,4.6vw,64px)}
 .hero h1 span,.hero h1 em{display:block;text-wrap:balance}
+.hero h1 .sandals-line{display:flex;align-items:center;gap:20px}
+.hero h1 .sandals-line em{flex:0 1 auto;min-width:0}
+.hero-icon{flex:none;color:var(--accent);width:1.6em;height:1.6em}
 .hero .intro{max-width:560px}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .hero-art{margin:0;justify-self:center;max-width:380px;transform:rotate(1.5deg)}
@@ -81,7 +84,6 @@ main{flex:1}
 
 /* Home: calling + pillars */
 .home-page .calling{max-width:none;text-align:center;background:var(--footer-bg);color:var(--footer-ink);padding:88px var(--gutter)}
-.calling-icon{display:block;margin:0 auto 12px;color:var(--marigold)}
 .calling .eyebrow{color:var(--marigold)}
 .calling h2,.calling p{max-width:var(--read);margin-left:auto;margin-right:auto}
 .calling>p:last-of-type{color:var(--footer-muted);font-size:20px}
