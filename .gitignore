@@ -1,0 +1,14 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.env.*
+*.xml
+source-photos/
+# Raw Facebook photo downloads; resized copies live in assets/photos/
+*_n.jpg
+*_n.jpeg
+*_n.png
+# Only web-ready kebab-case photos are tracked; anything else dropped in assets/photos/ stays local.
+assets/photos/*
+!assets/photos/[a-z]*-*.jpg
