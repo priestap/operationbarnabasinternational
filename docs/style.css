@@ -94,6 +94,22 @@ main{flex:1}
 .pillars a{font-weight:600}
 @media(max-width:800px){.pillars{grid-template-columns:1fr}.pillars article{padding:28px 24px}.pillar-photo{width:calc(100% + 48px);margin:-28px -24px 24px}}
 
+/* Email sign-up: the primary call to action */
+.subscribe{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;background:var(--sand);border-radius:16px;padding:44px 48px;border-top:4px solid var(--marigold)}
+.home-page main>section.subscribe{width:calc(100% - 2*var(--gutter));max-width:calc(var(--wide) - 2*var(--gutter));margin-bottom:88px;padding:44px 48px}
+.subscribe h2{margin:6px 0 10px}
+.subscribe p{margin:0;color:var(--muted)}
+.prose .subscribe{margin:32px 0 40px;grid-template-columns:1fr;gap:20px;padding:32px}
+.prose .subscribe h2{font-size:30px;margin-top:6px}
+.subscribe-row{display:flex;gap:10px}
+.subscribe-row input{flex:1;min-width:0;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.subscribe-status{min-height:1.4em;margin:10px 0 0!important;font-size:16px}
+.subscribe-status[data-state="success"]{color:var(--label);font-weight:600}
+.subscribe-status[data-state="error"]{color:#b3261e}
+:root[data-theme="dark"] .subscribe-status[data-state="error"]{color:#f2a49b}
+@media(max-width:800px){.subscribe,.home-page main>section.subscribe{grid-template-columns:1fr;gap:20px;padding:28px 24px}}
+@media(max-width:420px){.subscribe-row{flex-direction:column}.subscribe-row .button{justify-content:center}}
+
 /* Home: photo strip */
 .gallery{padding-bottom:88px}
 .photo-grid{display:grid;grid-template-columns:.8fr 1fr .8fr;grid-template-rows:260px 260px;grid-template-areas:"a b d" "a c d";gap:16px}
@@ -186,6 +202,10 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .form-note[data-state="success"]{color:var(--label);font-weight:600}
 
 /* Footer */
+.footer-subscribe-label{font-weight:600;margin:24px 0 8px}
+.site-footer .subscribe-row input{background:var(--footer-ink);color:#2a2420;border-color:transparent}
+.site-footer .subscribe-status{color:var(--footer-ink)}
+.site-footer .subscribe-status[data-state="error"]{color:#f2a49b}
 .site-footer{background:var(--footer-bg);color:var(--footer-ink);padding:64px max(var(--gutter),calc((100% - var(--wide))/2 + var(--gutter))) 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;font-size:16px}
 .footer-tagline{font:italic 20px/1.4 var(--serif);margin:20px 0 8px}
 .footer-partner{color:var(--footer-muted);margin:0}
