@@ -8,7 +8,7 @@
   --band-green:#3b5a2f;--band-green-ink:#f6f1e6;--band-terra:#a63d24;--band-terra-ink:#fff;
   --footer-bg:#2b2622;--footer-ink:#ece4d8;--footer-muted:#b3a797;--footer-line:#453d36;--on-dark-accent:#c7d6a8;
   --hero-from:#faf7f2;--hero-to:#faf7f2;--shadow:0 18px 40px -18px rgba(60,35,15,.45);
-  --wide:1200px;--read:720px;--gutter:clamp(16px,4vw,48px);
+  --wide:1200px;--read:720px;--prose:840px;--gutter:clamp(16px,4vw,48px);
   --serif:'Fraunces',Georgia,serif;--sans:'Source Sans 3',system-ui,sans-serif;
 }
 :root[data-theme="dark"]{
@@ -161,7 +161,7 @@ main{flex:1}
 .chip{background:var(--sand);color:var(--label);font-weight:600;font-size:13px;letter-spacing:.01em;padding:3px 10px;border-radius:99px}
 
 /* Interior pages */
-.pagehead,.prose{max-width:calc(var(--read) + 2*var(--gutter));margin:auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.pagehead,.prose{max-width:calc(var(--prose) + 2*var(--gutter));margin:auto;padding-left:var(--gutter);padding-right:var(--gutter)}
 .pagehead{padding-top:48px}
 .pagehead h1{font-size:clamp(38px,5.4vw,60px)}
 .prose{padding-bottom:96px}
