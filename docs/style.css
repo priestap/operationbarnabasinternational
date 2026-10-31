@@ -20,9 +20,11 @@
   --footer-bg:#141110;--footer-ink:#ece4d8;--footer-muted:#a89c8d;--footer-line:#352e28;--on-dark-accent:#c7d6a8;
   --hero-from:#1d1916;--hero-to:#1d1916;--arch:#2c2621;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
 }
+/* Paper grain only in light mode; dark mode stays flat. */
+:root[data-theme="dark"] body,:root[data-theme="dark"] .hero-visual::before{background-image:none}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font:18px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg) url("assets/paper-texture.jpg");background-blend-mode:multiply;color:var(--ink);font:18px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto}
 a{color:var(--accent);text-underline-offset:4px;text-decoration-thickness:1px}
 a:hover{color:var(--accent-hover)}
@@ -76,7 +78,7 @@ main{flex:1}
 
 /* Home: hero */
 .home-page main>section{max-width:var(--wide);margin:auto;padding-left:var(--gutter);padding-right:var(--gutter)}
-.home-page .hero{max-width:none;background:linear-gradient(180deg,var(--hero-from),var(--hero-to));padding:56px max(var(--gutter),calc((100% - var(--wide))/2 + var(--gutter))) 88px;display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center}
+.home-page .hero{max-width:none;background:transparent;padding:56px max(var(--gutter),calc((100% - var(--wide))/2 + var(--gutter))) 88px;display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center}
 .hero h1{font-size:clamp(38px,4.6vw,64px)}
 .hero h1 span,.hero h1 em{display:block;text-wrap:balance}
 .hero .intro{max-width:560px}
@@ -86,7 +88,7 @@ main{flex:1}
 .hero-verse cite{display:block;margin-top:6px;font:600 14px var(--sans);font-style:normal;color:var(--label)}
 .hero-visual{position:relative;justify-self:center;width:100%;max-width:460px;padding:56px 40px 0}
 /* Arched panel behind the painting, set slightly off-center like a chapel window. */
-.hero-visual::before{content:"";position:absolute;top:0;bottom:64px;left:40px;right:0;background:var(--arch);border-radius:999px 999px 18px 18px}
+.hero-visual::before{content:"";position:absolute;top:0;bottom:64px;left:40px;right:0;background:var(--arch) url("assets/paper-texture.jpg");background-blend-mode:multiply;border-radius:999px 999px 18px 18px}
 .hero-art{position:relative;margin:0 auto;max-width:380px;transform:rotate(1.5deg)}
 .hero-art img{display:block;border:10px solid #fff;box-shadow:var(--shadow)}
 .hero-art figcaption{font:italic 15px var(--serif);color:var(--muted);text-align:center;margin-top:16px;transform:rotate(-1.5deg)}
