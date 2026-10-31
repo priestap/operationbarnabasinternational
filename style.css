@@ -1,19 +1,19 @@
-/* Operation Barnabas International. Warm marigold and clay, drawn from conference photos; photos carry the color. */
+/* Operation Barnabas International. Palette taken from "The Faithful Shepherd": sky, slate, olive grass, and the flame. */
 :root{
-  --bg:#faf6ef;--surface:#fff;--sand:#f1e8da;--ink:#2a2420;--muted:#6b5f55;
-  --accent:#9c2f2f;--accent-hover:#7d2323;--label:#1f6f78;--line:#e6dccd;
-  --marigold:#e59a1d;--marigold-hover:#cf8512;--on-marigold:#2a2420;
-  --footer-bg:#2b2622;--footer-ink:#ece4d8;--footer-muted:#b3a797;--footer-line:#453d36;
-  --hero-from:#f6e6cc;--hero-to:#faf6ef;--shadow:0 18px 40px -18px rgba(60,35,15,.45);
+  --bg:#f7f5f0;--surface:#fff;--sand:#e9ecf1;--ink:#2a2722;--muted:#5e5a52;
+  --accent:#3d5578;--accent-hover:#2f4563;--flame:#9c2f2f;--label:#5c6340;--line:#e2e0d8;
+  --button:#3d5578;--button-hover:#2f4563;--on-button:#fff;
+  --footer-bg:#24261d;--footer-ink:#e9ebe0;--footer-muted:#b0b39c;--footer-line:#3d4033;--on-dark-accent:#bccae0;
+  --hero-from:#e4e9f1;--hero-to:#f7f5f0;--shadow:0 18px 40px -18px rgba(36,38,29,.45);
   --wide:1200px;--read:720px;--gutter:clamp(16px,4vw,48px);
   --serif:'Fraunces',Georgia,serif;--sans:'Source Sans 3',system-ui,sans-serif;
 }
 :root[data-theme="dark"]{
-  --bg:#1d1916;--surface:#27211d;--sand:#2e2722;--ink:#f1e9de;--muted:#b8ab9b;
-  --accent:#ee8f7c;--accent-hover:#f5b0a2;--label:#6cc3cc;--line:#3d342d;
-  --marigold:#f0a830;--marigold-hover:#f5bf62;--on-marigold:#1d1916;
-  --footer-bg:#141110;--footer-ink:#ece4d8;--footer-muted:#a89c8d;--footer-line:#352e28;
-  --hero-from:#33271c;--hero-to:#1d1916;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
+  --bg:#1c1d18;--surface:#25271f;--sand:#2b2e26;--ink:#f0eee6;--muted:#b6b3a6;
+  --accent:#a9bbd8;--accent-hover:#c7d4e8;--flame:#ee8f7c;--label:#b9c17f;--line:#3a3d33;
+  --button:#a9bbd8;--button-hover:#c7d4e8;--on-button:#1b1d16;
+  --footer-bg:#141510;--footer-ink:#e9ebe0;--footer-muted:#a4a796;--footer-line:#33362c;--on-dark-accent:#bccae0;
+  --hero-from:#232a33;--hero-to:#1c1d18;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -28,7 +28,7 @@ p,li,blockquote{text-wrap:pretty}
 h1{font-size:clamp(40px,6vw,72px);margin:12px 0 24px}
 h2{font-size:clamp(30px,4vw,44px);margin:10px 0 20px}
 h3{font-size:26px;margin:8px 0 12px}
-em{font-style:italic;color:var(--accent)}
+em{font-style:italic;color:var(--flame)}
 .eyebrow{font:600 15px/1.4 var(--sans);letter-spacing:.01em;color:var(--label);margin:0}
 .intro{font-size:21px;line-height:1.6;color:var(--ink)}
 .muted{color:var(--muted)}
@@ -37,10 +37,10 @@ em{font-style:italic;color:var(--accent)}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Buttons */
-.button{display:inline-flex;align-items:center;gap:8px;background:var(--marigold);color:var(--on-marigold);border:2px solid var(--marigold);border-radius:8px;padding:12px 22px;font:600 16px/1.2 var(--sans);text-decoration:none;transition:background .3s,border-color .3s,color .3s;cursor:pointer}
-.button:hover{background:var(--marigold-hover);border-color:var(--marigold-hover);color:var(--on-marigold)}
-.button.outline{background:transparent;color:var(--accent);border-color:color-mix(in srgb,var(--marigold) 55%,transparent)}
-.button.outline:hover{background:transparent;border-color:var(--marigold);color:var(--accent)}
+.button{display:inline-flex;align-items:center;gap:8px;background:var(--button);color:var(--on-button);border:2px solid var(--button);border-radius:8px;padding:12px 22px;font:600 16px/1.2 var(--sans);text-decoration:none;transition:background .3s,border-color .3s,color .3s;cursor:pointer}
+.button:hover{background:var(--button-hover);border-color:var(--button-hover);color:var(--on-button)}
+.button.outline{background:transparent;color:var(--button);border-color:color-mix(in srgb,var(--button) 40%,transparent)}
+.button.outline:hover{background:transparent;border-color:var(--button);color:var(--button)}
 .button.small{padding:8px 16px;font-size:15px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
 
@@ -84,7 +84,7 @@ main{flex:1}
 
 /* Home: calling + pillars */
 .home-page .calling{max-width:none;text-align:center;background:var(--footer-bg);color:var(--footer-ink);padding:88px var(--gutter)}
-.calling .eyebrow{color:var(--marigold)}
+.calling .eyebrow{color:var(--on-dark-accent)}
 .calling h2,.calling p{max-width:var(--read);margin-left:auto;margin-right:auto}
 .calling>p:last-of-type{color:var(--footer-muted);font-size:20px}
 .calling-photo{margin:48px auto 0;max-width:960px}
@@ -99,7 +99,7 @@ main{flex:1}
 @media(max-width:800px){.pillars{grid-template-columns:1fr}.pillars article{padding:28px 24px}.pillar-photo{width:calc(100% + 48px);margin:-28px -24px 24px}}
 
 /* Email sign-up: the primary call to action */
-.subscribe{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;background:var(--sand);border-radius:16px;padding:44px 48px;border-top:4px solid var(--marigold)}
+.subscribe{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;background:var(--sand);border-radius:16px;padding:44px 48px;border-top:4px solid var(--button)}
 .home-page main>section.subscribe{width:calc(100% - 2*var(--gutter));max-width:calc(var(--wide) - 2*var(--gutter));margin-bottom:88px;padding:44px 48px}
 .subscribe h2{margin:6px 0 10px}
 .subscribe p{margin:0;color:var(--muted)}
@@ -131,7 +131,7 @@ main{flex:1}
 .triage .cite{font:600 15px var(--sans);letter-spacing:.01em;color:var(--label);margin:24px 0 0}
 .voices{padding-top:88px;padding-bottom:40px}
 .voices ul{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.voices li{border-top:3px solid var(--marigold);padding-top:20px}
+.voices li{border-top:3px solid var(--label);padding-top:20px}
 .voices blockquote{margin:0 0 16px;font-size:21px;line-height:1.45}
 .voices li p{margin:0;color:var(--muted);font-size:15px;font-weight:600}
 @media(max-width:900px){.voices ul{grid-template-columns:1fr}}
@@ -175,7 +175,7 @@ main{flex:1}
 .shepherd img{display:block;border:6px solid #fff;box-shadow:var(--shadow)}
 .shepherd h2{margin-top:8px}
 @media(max-width:700px){.shepherd{grid-template-columns:1fr}.shepherd figure{max-width:240px}}
-blockquote.pull{margin:48px 0 0;padding-left:24px;border-left:3px solid var(--marigold);font-size:24px;line-height:1.4}
+blockquote.pull{margin:48px 0 0;padding-left:24px;border-left:3px solid var(--label);font-size:24px;line-height:1.4}
 blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01em;color:var(--label);margin-top:12px;font-style:normal}
 
 /* Conferences */
@@ -214,12 +214,12 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .footer-tagline{font:italic 20px/1.4 var(--serif);margin:20px 0 8px}
 .footer-partner{color:var(--footer-muted);margin:0}
 .footer-links{display:flex;flex-direction:column;gap:6px}
-.footer-links h2{font:600 15px var(--sans);letter-spacing:.01em;color:var(--marigold);margin:6px 0 8px}
+.footer-links h2{font:600 15px var(--sans);letter-spacing:.01em;color:var(--on-dark-accent);margin:6px 0 8px}
 .footer-links p{margin:0 0 8px}
 .footer-links a{color:var(--footer-ink)}
-.footer-links a:hover{color:var(--marigold)}
+.footer-links a:hover{color:var(--on-dark-accent)}
 .site-footer .brand,.site-footer .brand:hover{color:var(--footer-ink)}
-.site-footer .brand-mark{color:var(--marigold)}
+.site-footer .brand-mark{color:var(--on-dark-accent)}
 .site-footer .brand-sub{color:var(--footer-muted)}
 .footer-bottom{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--footer-line);padding-top:20px;color:var(--footer-muted);font-size:14px}
 .footer-bottom p{margin:0}
