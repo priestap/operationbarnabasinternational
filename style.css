@@ -223,7 +223,9 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .site-footer .subscribe-status[data-state="error"]{color:#f2a49b}
 .site-footer{background:var(--footer-bg);color:var(--footer-ink);padding:64px max(var(--gutter),calc((100% - var(--wide))/2 + var(--gutter))) 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;font-size:16px}
 .footer-tagline{font:italic 20px/1.4 var(--serif);margin:20px 0 8px}
-.footer-partner{color:var(--footer-muted);margin:0}
+.footer-anm{display:inline-flex;flex-direction:column;gap:8px;color:var(--footer-muted);text-decoration:none;font-size:14px;margin-top:4px}
+.footer-anm:hover{color:var(--footer-ink)}
+.footer-anm img{display:block;width:150px;height:auto}
 .footer-links{display:flex;flex-direction:column;gap:6px}
 .footer-links h2{font:600 15px var(--sans);letter-spacing:.01em;color:var(--marigold);margin:6px 0 8px}
 .footer-links p{margin:0 0 8px}
