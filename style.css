@@ -81,8 +81,6 @@ main{flex:1}
 .home-page .hero{max-width:none;background:transparent;padding:56px max(var(--gutter),calc((100% - var(--wide))/2 + var(--gutter))) 88px;display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center}
 .hero h1{font-size:clamp(38px,4.6vw,64px)}
 .hero h1 span,.hero h1 em{display:block;text-wrap:balance}
-/* Hand-drawn marigold stroke under "sandals". */
-.hero h1 .brush{display:inline;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M3 11.5C30 7 62 5.5 98 6.5c33 .9 64 3 99 1.6' fill='none' stroke='%23e59a1d' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M18 13.5c40-3.6 92-4.2 160-1.8' fill='none' stroke='%23e59a1d' stroke-width='2.4' stroke-linecap='round' opacity='.7'/%3E%3C/svg%3E") no-repeat 0 96%/100% .3em;padding-bottom:.06em}
 .hero .intro{max-width:560px}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .hero-verse{margin:44px 0 0;max-width:400px;text-wrap:balance;font:italic 19px/1.45 var(--serif);color:var(--muted)}
@@ -94,19 +92,17 @@ main{flex:1}
 .hero-art{position:relative;margin:0 auto;max-width:380px;transform:rotate(1.5deg)}
 .hero-art img{display:block;border:10px solid #fff;box-shadow:var(--shadow)}
 .hero-art figcaption{font:italic 15px var(--serif);color:var(--muted);text-align:center;margin-top:16px;transform:rotate(-1.5deg)}
-/* Gentle one-time entrance: copy rises in, the painting settles into its tilt, the stroke draws on. */
+/* Gentle one-time entrance: copy rises in, the painting settles into its tilt . */
 @media(prefers-reduced-motion:no-preference){
   .hero-copy>*{animation:hero-rise .7s cubic-bezier(.2,.7,.2,1) both}
   .hero-copy>:nth-child(2){animation-delay:.08s}.hero-copy>:nth-child(3){animation-delay:.16s}
   .hero-copy>:nth-child(4){animation-delay:.24s}.hero-copy>:nth-child(5){animation-delay:.32s}
   .hero-visual::before{animation:hero-fade .9s ease-out .1s both}
   .hero-art{animation:hero-settle .9s cubic-bezier(.2,.7,.2,1) .15s both}
-  .hero h1 .brush{animation:hero-draw .7s ease-out .75s both}
 }
 @keyframes hero-rise{from{opacity:0;transform:translateY(14px)}}
 @keyframes hero-fade{from{opacity:0}}
 @keyframes hero-settle{from{opacity:0;transform:rotate(4deg) translateY(16px)}}
-@keyframes hero-draw{from{background-size:0 .3em}}
 /* Phones: the painting becomes a small tilted thumbnail beside the headline. */
 @media(max-width:800px){
   .home-page .hero{grid-template-columns:minmax(0,1fr) 112px;grid-template-areas:"eyebrow eyebrow" "title art" "intro intro" "actions actions" "verse verse";gap:0 16px;padding-top:28px;padding-bottom:56px}
