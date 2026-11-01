@@ -95,7 +95,7 @@ def excerpt(s,words=30):
  cut=' '.join(text[:words])
  return html.escape(cut.rstrip('.,;:…')+'…' if len(text)>words else cut)
 
-BRAND='<svg class="brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M16 32V15a5.5 5.5 0 0 1 11 0v2.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>'
+BRAND='<svg class="brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><circle cx="32" cy="32" r="32" fill="currentColor"/><path class="brand-crook" d="M28 55V26.5C28 22.5 26 20 26 15.5 26 10.5 28.5 7 32 7 35.5 7 37.5 10 37.2 14 36.9 17.5 35.5 19.5 36.7 22.5" fill="none" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 NAV=[('About','about/'),('Conferences','conferences/'),('Updates','updates/'),('Photos',FACEBOOK),('Contact','contact/')]
 def navlinks(current):
  links=[]

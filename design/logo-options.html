@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Logo options</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#faf7f2;color:#2b2622;font:16px/1.5 'Source Sans 3',sans-serif;padding:32px}
+h2{font:600 22px 'Fraunces',serif;margin:40px 0 12px}
+.row{display:flex;flex-wrap:wrap;gap:28px;align-items:center}
+.card{background:#fff;border:1px solid #e7e0d4;border-radius:12px;padding:20px 24px}
+.dark{background:#2b2622;color:#ece4d8;border-color:#2b2622}
+.label{font-size:13px;color:#6b5f55;margin-top:10px}.dark .label{color:#b3a797}
+.brand{display:inline-flex;align-items:center;gap:12px}
+.w1{font:600 22px/1.05 'Fraunces',serif;white-space:nowrap}
+.w1 small{display:block;font:600 22px/1.05 'Fraunces',serif}
+.w2{font:600 21px/1.1 'Fraunces',serif;white-space:nowrap}
+.w3{font:600 19px/1.12 'Fraunces',serif}
+.sizes{display:flex;gap:18px;align-items:end}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="A" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="var(--c,#a63d24)"/><path d="M27 54V20a9 9 0 0 1 18 0v4" fill="none" stroke="var(--k,#fff)" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="B" viewBox="0 0 64 64"><rect width="64" height="64" rx="13" fill="var(--c,#a63d24)"/><path d="M27 54V20a9 9 0 0 1 18 0v4" fill="none" stroke="var(--k,#fff)" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <g id="ff"><path d="M45 4C51 4 55 8.5 55 15.5 55 22 52 26.5 51 32 50.2 37 52.5 41 52.5 48 52.5 55 49 59 45 59 41 59 37.5 55.5 37.5 49 37.5 42 39.5 38 39 32 38.5 26 35 22 35 15.5 35 8.5 39 4 45 4Z"/><path d="M40.3 28C39.3 21.5 41 16.5 44 14.5 47.2 16.5 51 21.5 50.4 28"/></g>
+  <symbol id="C" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="var(--c,#a63d24)"/><path d="M17 54V20a9 9 0 0 1 18 0v4" fill="none" stroke="var(--k,#fff)" stroke-width="4.5" stroke-linecap="round"/>
+   <g transform="translate(25.5 25.5) scale(.47)" fill="none" stroke="var(--k,#fff)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ff" transform="rotate(5 45 32)"/><use href="#ff" transform="matrix(-1 0 0 1 64 -2) rotate(5 45 32)"/></g></symbol>
+  <path id="sole" d="M45 4C51 4 55 8.5 55 15.5 55 22 52 26.5 51 32 50.2 37 52.5 41 52.5 48 52.5 55 49 59 45 59 41 59 37.5 55.5 37.5 49 37.5 42 39.5 38 39 32 38.5 26 35 22 35 15.5 35 8.5 39 4 45 4Z"/>
+  <symbol id="D" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="var(--c,#a63d24)"/><path d="M17 54V20a9 9 0 0 1 18 0v4" fill="none" stroke="var(--k,#fff)" stroke-width="4.5" stroke-linecap="round"/>
+   <g transform="translate(25.5 25.5) scale(.47)"><g fill="var(--k,#fff)"><use href="#sole" transform="rotate(5 45 32)"/><use href="#sole" transform="matrix(-1 0 0 1 64 -2) rotate(5 45 32)"/></g>
+   <g fill="none" stroke="var(--c,#a63d24)" stroke-width="4.5" stroke-linecap="round"><path d="M40.3 28C39.3 21.5 41 16.5 44 14.5 47.2 16.5 51 21.5 50.4 28" transform="rotate(5 45 32)"/><path d="M40.3 28C39.3 21.5 41 16.5 44 14.5 47.2 16.5 51 21.5 50.4 28" transform="matrix(-1 0 0 1 64 -2) rotate(5 45 32)"/></g></g></symbol>
+ </defs>
+</svg>
+<h2>Marks at real sizes (header 44px · 32px · favicon 16px)</h2>
+<div class="row">
+ <div class="card"><div class="sizes"><svg width="44" height="44"><use href="#A"/></svg><svg width="32" height="32"><use href="#A"/></svg><svg width="16" height="16"><use href="#A"/></svg></div><div class="label">A · Filled circle, favicon crook</div></div>
+ <div class="card"><div class="sizes"><svg width="44" height="44"><use href="#B"/></svg><svg width="32" height="32"><use href="#B"/></svg><svg width="16" height="16"><use href="#B"/></svg></div><div class="label">B · Filled square (the favicon)</div></div>
+ <div class="card"><div class="sizes"><svg width="44" height="44"><use href="#C"/></svg><svg width="32" height="32"><use href="#C"/></svg><svg width="16" height="16"><use href="#C"/></svg></div><div class="label">C · Crook + sandals, outlined</div></div>
+ <div class="card"><div class="sizes"><svg width="44" height="44"><use href="#D"/></svg><svg width="32" height="32"><use href="#D"/></svg><svg width="16" height="16"><use href="#D"/></svg></div><div class="label">D · Crook + sandals, solid</div></div>
+</div>
+<h2>Large, for detail</h2>
+<div class="row"><svg width="160" height="160"><use href="#A"/></svg><svg width="160" height="160"><use href="#B"/></svg><svg width="160" height="160"><use href="#C"/></svg><svg width="160" height="160"><use href="#D"/></svg></div>
+<h2>Wordmarks with "International" at equal weight</h2>
+<div class="row">
+ <div class="card"><span class="brand"><svg width="44" height="44"><use href="#A"/></svg><span class="w1">Operation Barnabas<small>International</small></span></span><div class="label">1 · Two lines, same size</div></div>
+ <div class="card"><span class="brand"><svg width="44" height="44"><use href="#A"/></svg><span class="w2">Operation Barnabas International</span></span><div class="label">2 · One line</div></div>
+ <div class="card"><span class="brand"><svg width="48" height="48"><use href="#A"/></svg><span class="w3">Operation<br>Barnabas<br>International</span></span><div class="label">3 · Three lines, stacked</div></div>
+</div>
+<h2>Crook + sandals with the wordmark</h2>
+<div class="row">
+ <div class="card"><span class="brand"><svg width="44" height="44"><use href="#C"/></svg><span class="w1">Operation Barnabas<small>International</small></span></span><div class="label">C</div></div>
+ <div class="card"><span class="brand"><svg width="44" height="44"><use href="#D"/></svg><span class="w1">Operation Barnabas<small>International</small></span></span><div class="label">D</div></div>
+</div>
+<h2>On the dark footer</h2>
+<div class="row">
+ <div class="card dark"><span class="brand" style="--c:#e59a1d;--k:#2b2622"><svg width="44" height="44"><use href="#A"/></svg><span class="w1">Operation Barnabas<small>International</small></span></span><div class="label">A, marigold</div></div>
+ <div class="card dark"><span class="brand" style="--c:#e59a1d;--k:#2b2622"><svg width="44" height="44"><use href="#C"/></svg><span class="w1">Operation Barnabas<small>International</small></span></span><div class="label">C, marigold</div></div>
+ <div class="card dark"><span class="brand" style="--c:#e59a1d;--k:#2b2622"><svg width="44" height="44"><use href="#D"/></svg><span class="w1">Operation Barnabas<small>International</small></span></span><div class="label">D, marigold</div></div>
+</div>
+</body></html>

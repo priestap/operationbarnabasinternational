@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<body style="margin:0;background:#faf7f2;color:#2b2622;font:14px sans-serif;padding:24px">
+<style>.r{display:flex;gap:36px;align-items:center;margin-bottom:26px}.l{color:#6b5f55;margin-top:6px}.w{font:600 22px/1.05 'Fraunces',serif;white-space:nowrap}.b{display:inline-flex;align-items:center;gap:12px}svg{display:block}</style>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <g id="sole"><path d="M45 4C51 4 55 8.5 55 15.5 55 22 52 26.5 51 32 50.2 37 52.5 41 52.5 48 52.5 55 49 59 45 59 41 59 37.5 55.5 37.5 49 37.5 42 39.5 38 39 32 38.5 26 35 22 35 15.5 35 8.5 39 4 45 4Z"/></g>
+ <g id="straps"><path d="M35.5 17C41 13.5 49 13.5 54.5 17"/><path d="M36.5 27 54 40.5M53.5 27 36 40.5"/></g>
+ <!-- outline sandal: knock-out halo, sole outline, straps -->
+ <g id="sandalO"><use href="#sole" fill="var(--bg)" stroke="var(--bg)" stroke-width="12"/><use href="#sole" fill="none" stroke="var(--c)" stroke-width="4"/><use href="#straps" fill="none" stroke="var(--c)" stroke-width="7" stroke-linecap="round"/></g>
+ <!-- solid sandal: filled sole, straps as bg-coloured bands with ink edges -->
+ <g id="sandalS"><use href="#sole" fill="var(--bg)" stroke="var(--bg)" stroke-width="12"/><use href="#sole" fill="var(--c)"/><use href="#straps" fill="none" stroke="var(--bg)" stroke-width="9" stroke-linecap="round"/><use href="#straps" fill="none" stroke="var(--c)" stroke-width="4.5" stroke-linecap="round"/></g>
+ <g id="ripples" fill="none" stroke="var(--c)" stroke-width="2.2"><ellipse cx="48" cy="42" rx="44" ry="14"/><ellipse cx="48" cy="42" rx="35" ry="10.5"/><ellipse cx="48" cy="42" rx="26" ry="7"/></g>
+ <symbol id="markO" viewBox="0 0 96 64"><use href="#ripples"/><g transform="translate(35 34) scale(1 .62) rotate(28) scale(.8) translate(-45 -31.5)"><use href="#sandalO" transform="matrix(-1 0 0 1 90 0)"/></g><g transform="translate(61 27) scale(1 .62) rotate(28) scale(.8) translate(-45 -31.5)"><use href="#sandalO"/></g></symbol>
+ <symbol id="markS" viewBox="0 0 96 64"><use href="#ripples"/><g transform="translate(35 34) scale(1 .62) rotate(28) scale(.8) translate(-45 -31.5)"><use href="#sandalS" transform="matrix(-1 0 0 1 90 0)"/></g><g transform="translate(61 27) scale(1 .62) rotate(28) scale(.8) translate(-45 -31.5)"><use href="#sandalS"/></g></symbol>
+ <!-- favicon: sandals only, in a filled circle -->
+ <symbol id="fav" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#a63d24"/><g style="--c:#fff;--bg:#a63d24"><g transform="translate(23 33) rotate(-10) scale(.5 .62) translate(-45 -31.5)"><use href="#sandalS" transform="matrix(-1 0 0 1 90 0)"/></g><g transform="translate(41 31) rotate(10) scale(.5 .62) translate(-45 -31.5)"><use href="#sandalS"/></g></g></symbol>
+ <symbol id="crook" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#a63d24"/><path transform="matrix(-1 0 0 1 63 0)" d="M35 55V26.5C35 22.5 37 20 37 15.5 37 10.5 34.5 7 31 7 27.5 7 25.5 10 25.8 14 26.1 17.5 27.5 19.5 26.3 22.5" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div style="--c:#a63d24;--bg:#faf7f2">
+<div class="r"><div><svg width="288" height="192"><use href="#markO"/></svg><div class="l">A · outline sandals on ripples</div></div><div><svg width="288" height="192"><use href="#markS"/></svg><div class="l">B · solid sandals on ripples</div></div><div><svg width="150" height="150"><use href="#fav"/></svg><div class="l">favicon companion</div></div></div>
+<div class="r">
+ <span class="b"><svg width="72" height="48"><use href="#markO"/></svg><span class="w">Operation Barnabas<br>International</span></span>
+ <span class="b"><svg width="72" height="48"><use href="#markS"/></svg><span class="w">Operation Barnabas<br>International</span></span>
+ <span class="b"><svg width="44" height="44"><use href="#crook"/></svg><span class="w">Operation Barnabas<br>International</span></span>
+</div>
+<div class="r"><svg width="48" height="32"><use href="#markO"/></svg><svg width="48" height="32"><use href="#markS"/></svg><svg width="32" height="32"><use href="#fav"/></svg><svg width="16" height="16"><use href="#fav"/></svg><svg width="16" height="16"><use href="#crook"/></svg><span class="l">small sizes</span></div>
+</div>
+<div style="--c:#e59a1d;--bg:#2b2622;background:#2b2622;color:#ece4d8;padding:20px;border-radius:12px;display:flex;gap:40px">
+ <span class="b"><svg width="72" height="48"><use href="#markO"/></svg><span class="w">Operation Barnabas<br>International</span></span>
+ <span class="b"><svg width="72" height="48"><use href="#markS"/></svg><span class="w">Operation Barnabas<br>International</span></span>
+</div>

@@ -60,7 +60,9 @@ main{flex:1}
 .brand:hover{color:var(--ink)}
 .brand-mark{color:var(--accent);flex:none}
 .brand-copy{font:600 22px/1.05 var(--serif);white-space:nowrap}
-.brand-sub{display:block;font:600 13px/1.6 var(--sans);letter-spacing:.02em;color:var(--muted)}
+.brand-sub{display:block;font:inherit;color:inherit}
+.brand-crook{stroke:#fff}
+.site-footer .brand-crook{stroke:var(--footer-bg)}
 .main-nav{display:flex;align-items:center;gap:26px;font-size:16px}
 .main-nav a:not(.button),.mobile-menu nav a:not(.button){color:var(--ink);text-decoration:none}
 .main-nav a:not(.button):hover,.main-nav a[aria-current]{color:var(--accent)}
@@ -262,7 +264,6 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .footer-links a:hover{color:var(--marigold)}
 .site-footer .brand,.site-footer .brand:hover{color:var(--footer-ink)}
 .site-footer .brand-mark{color:var(--marigold)}
-.site-footer .brand-sub{color:var(--footer-muted)}
 .footer-bottom{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--footer-line);padding-top:20px;color:var(--footer-muted);font-size:14px}
 .footer-bottom p{margin:0}
 .theme-toggle{background:none;border:1px solid var(--footer-line);border-radius:99px;color:var(--footer-ink);padding:8px;display:inline-flex;cursor:pointer}
