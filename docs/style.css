@@ -58,11 +58,9 @@ main{flex:1}
 .site-header{width:100%;max-width:var(--wide);margin:0 auto;padding:22px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:inline-flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
 .brand:hover{color:var(--ink)}
-.brand-mark{color:var(--accent);flex:none}
+.brand-mark{color:var(--marigold);flex:none}
 .brand-copy{font:600 22px/1.05 var(--serif);white-space:nowrap}
 .brand-sub{display:block;font:inherit;color:inherit}
-.brand-crook{stroke:#fff}
-.site-footer .brand-crook{stroke:var(--footer-bg)}
 .main-nav{display:flex;align-items:center;gap:26px;font-size:16px}
 .main-nav a:not(.button),.mobile-menu nav a:not(.button){color:var(--ink);text-decoration:none}
 .main-nav a:not(.button):hover,.main-nav a[aria-current]{color:var(--accent)}
