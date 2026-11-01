@@ -48,8 +48,6 @@ em{font-style:italic;color:var(--flame)}
 .button:hover{background:var(--button-hover);border-color:var(--button-hover);color:var(--on-button)}
 .button.outline{background:transparent;color:var(--button);border-color:color-mix(in srgb,var(--button) 40%,transparent)}
 .button.outline:hover{background:transparent;border-color:var(--button);color:var(--button)}
-.button.donate{background:var(--marigold);border-color:var(--marigold);color:var(--on-marigold)}
-.button.donate:hover{background:var(--marigold-hover);border-color:var(--marigold-hover);color:var(--on-marigold)}
 .button.small{padding:8px 16px;font-size:15px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
 
