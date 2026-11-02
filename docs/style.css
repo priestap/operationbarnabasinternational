@@ -273,3 +273,11 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .theme-toggle,.footer-social{background:none;border:1px solid var(--footer-line);border-radius:99px;color:var(--footer-ink);padding:8px;display:inline-flex;cursor:pointer}
 .footer-social:hover{color:var(--marigold);border-color:var(--marigold)}
 @media(max-width:800px){.site-footer{grid-template-columns:1fr;gap:28px}}
+.give-split{display:grid;grid-template-columns:1fr minmax(0,320px);grid-template-areas:"intro photo" "how photo";grid-template-rows:auto 1fr;column-gap:48px;align-content:start;align-items:start}
+.give-split>.intro{grid-area:intro;margin-top:0}
+.give-how{grid-area:how}
+.give-how p:first-child{margin-top:0}
+.give-photo{grid-area:photo;margin:0}
+.give-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px}
+.give-photo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+@media(max-width:700px){.give-split{grid-template-columns:1fr;grid-template-areas:"intro" "photo" "how"}.give-photo{margin:8px 0 28px}.give-photo img{aspect-ratio:4/3}}
