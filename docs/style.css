@@ -21,7 +21,7 @@
   --hero-from:#1d1916;--hero-to:#1d1916;--arch:#2c2621;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
 }
 /* Paper grain only in light mode; dark mode stays flat. */
-:root[data-theme="dark"] body,:root[data-theme="dark"] .hero-visual::before,:root[data-theme="dark"] .triage{background-image:none}
+:root[data-theme="dark"] body,:root[data-theme="dark"] .hero-visual::before,:root[data-theme="dark"] .about-visual::before,:root[data-theme="dark"] .triage{background-image:none}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg) url("assets/paper-texture.jpg");background-blend-mode:multiply;color:var(--ink);font:18px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
@@ -85,12 +85,12 @@ main{flex:1}
 .hero-verse::before{content:"";display:block;width:48px;height:3px;border-radius:2px;background:var(--marigold);margin-bottom:16px}
 .hero-verse cite{display:block;margin-top:6px;font:600 14px var(--sans);font-style:normal;color:var(--label)}
 .hero-visual{position:relative;justify-self:center;width:100%;max-width:460px;padding:56px 40px 0}
-/* Arched panel behind the painting, set slightly off-center like a chapel window. */
+/* Arched panel behind the hero photo, set slightly off-center like a chapel window. */
 .hero-visual::before{content:"";position:absolute;top:0;bottom:64px;left:40px;right:0;background:var(--arch) url("assets/paper-texture.jpg");background-blend-mode:multiply;border-radius:999px 999px 18px 18px}
 .hero-art{position:relative;margin:0 auto;max-width:380px;transform:rotate(1.5deg)}
 .hero-art img{display:block;border:10px solid #fff;box-shadow:var(--shadow)}
 .hero-art figcaption{font:italic 15px var(--serif);color:var(--muted);text-align:center;margin-top:16px;transform:rotate(-1.5deg)}
-/* Gentle one-time entrance: copy rises in, the painting settles into its tilt . */
+/* Gentle one-time entrance: copy rises in, the photo settles into its tilt. */
 @media(prefers-reduced-motion:no-preference){
   .hero-copy>*{animation:hero-rise .7s cubic-bezier(.2,.7,.2,1) both}
   .hero-copy>:nth-child(2){animation-delay:.08s}.hero-copy>:nth-child(3){animation-delay:.16s}
@@ -101,7 +101,7 @@ main{flex:1}
 @keyframes hero-rise{from{opacity:0;transform:translateY(14px)}}
 @keyframes hero-fade{from{opacity:0}}
 @keyframes hero-settle{from{opacity:0;transform:rotate(4deg) translateY(16px)}}
-/* Phones: the painting becomes a small tilted thumbnail beside the headline. */
+/* Phones: the photo becomes a small tilted thumbnail beside the headline. */
 @media(max-width:800px){
   .home-page .hero{grid-template-columns:minmax(0,1fr) 124px;grid-template-areas:"eyebrow eyebrow" "title art" "intro intro" "actions actions" "verse verse";gap:0 16px;padding-top:28px;padding-bottom:56px}
   .hero-copy{display:contents}
@@ -202,13 +202,10 @@ main{flex:1}
 .back{margin-top:48px;clear:both}
 .portrait{float:right;margin:6px 0 20px 32px;width:180px}
 .portrait img{display:block;border-radius:10px}
-.portrait figcaption,.shepherd figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.portrait figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 @media(max-width:600px){.portrait{width:130px;margin-left:20px}.prose .alignright{max-width:50%;margin-left:18px}}
-.shepherd{clear:both;margin-top:64px;padding-top:48px;border-top:1px solid var(--line);display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:start}
-.shepherd figure{margin:0}
-.shepherd img{display:block;border:6px solid #fff;box-shadow:var(--shadow)}
+.shepherd{clear:both;margin-top:64px;padding-top:48px;border-top:1px solid var(--line);scroll-margin-top:24px}
 .shepherd h2{margin-top:8px}
-@media(max-width:700px){.shepherd{grid-template-columns:1fr}.shepherd figure{max-width:240px}}
 .field-notes{display:grid;gap:18px;margin-top:24px}
 .field-notes>p{margin:6px 0 0}
 .field-notes blockquote{position:relative;margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 28px 24px 64px;font-size:19px;line-height:1.6}
@@ -281,7 +278,10 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .give-photo img{display:block;width:100%;aspect-ratio:6/5;object-fit:cover;border-radius:12px}
 .give-photo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 @media(max-width:700px){.give-split{grid-template-columns:1fr;grid-template-areas:"intro" "photo" "how"}.give-photo{margin:8px 0 28px}.give-photo img{aspect-ratio:auto}}
-.about-lead{float:right;width:300px;margin:6px 0 24px 40px}
-.about-lead img{display:block;width:100%;height:auto;border-radius:12px}
-.about-lead figcaption{font-size:14px;color:var(--muted);margin-top:8px}
-@media(max-width:700px){.about-lead{float:none;width:auto;margin:0 0 28px}.about-lead img{aspect-ratio:4/3;object-fit:cover;object-position:50% 60%}}
+/* About page: the painting in its arched panel beside the headline. */
+.about-visual{float:right;position:relative;width:320px;margin:0 0 28px 44px;padding:36px 28px 0}
+.about-visual::before{content:"";position:absolute;top:0;bottom:84px;left:28px;right:0;background:var(--arch) url("assets/paper-texture.jpg");background-blend-mode:multiply;border-radius:999px 999px 18px 18px}
+.about-visual .hero-art img{width:100%;height:auto;border-width:8px}
+.about-visual figcaption{font-size:14px;line-height:1.5}
+.about-visual figcaption a{font:600 14px var(--sans);font-style:normal}
+@media(max-width:700px){.about-visual{float:none;width:auto;max-width:300px;margin:0 auto 32px}}
