@@ -1,11 +1,11 @@
 /* Operation Barnabas International. Clean warm white with deep colors from the painting and the field:
-   forest green (the grass), terracotta (the flame and the saris), and warm charcoal. */
+   forest green (the grass), slate blue (the sky and the shepherd's shirt), marigold, and warm charcoal. */
 :root{
   --bg:#faf7f2;--surface:#fff;--sand:#f2ede4;--ink:#2b2622;--muted:#6b5f55;
-  --accent:#a63d24;--accent-hover:#86301b;--flame:#a63d24;--label:#3b5a2f;--line:#e7e0d4;
+  --accent:#2e5b7a;--accent-hover:#234a65;--flame:#2e5b7a;--label:#3b5a2f;--line:#e7e0d4;
   --button:#3b5a2f;--button-hover:#2f4a25;--on-button:#fff;
-  --marigold:#e59a1d;--marigold-hover:#cf8512;--on-marigold:#2b2622;
-  --band-green:#3b5a2f;--band-green-ink:#f6f1e6;--band-terra:#a63d24;--band-terra-ink:#fff;
+  --marigold:#e59a1d;--marigold-hover:#cf8512;--logo:#c27a0e;--on-marigold:#2b2622;
+  --band-green:#3b5a2f;--band-green-ink:#f6f1e6;--band-quote:#f1e6d4;--band-quote-ink:#2e5b7a;
   --footer-bg:#2b2622;--footer-ink:#ece4d8;--footer-muted:#b3a797;--footer-line:#453d36;--on-dark-accent:#c7d6a8;
   --hero-from:#faf7f2;--hero-to:#faf7f2;--arch:#f1e6d4;--shadow:0 18px 40px -18px rgba(60,35,15,.45);
   --wide:1200px;--read:720px;--prose:840px;--gutter:clamp(16px,4vw,48px);
@@ -13,15 +13,15 @@
 }
 :root[data-theme="dark"]{
   --bg:#1d1916;--surface:#27211d;--sand:#2e2722;--ink:#f1e9de;--muted:#b8ab9b;
-  --accent:#f08e70;--accent-hover:#f5ad96;--flame:#f08e70;--label:#9cc27f;--line:#3d342d;
+  --accent:#8fb8d6;--accent-hover:#b0cde3;--flame:#8fb8d6;--label:#9cc27f;--line:#3d342d;
   --button:#9cc27f;--button-hover:#b5d49d;--on-button:#1d1916;
-  --marigold:#f0a830;--marigold-hover:#f5bf62;--on-marigold:#1d1916;
-  --band-green:#2c4223;--band-green-ink:#eef3e6;--band-terra:#7e2f1c;--band-terra-ink:#fbeee8;
+  --marigold:#f0a830;--marigold-hover:#f5bf62;--logo:#f0a830;--on-marigold:#1d1916;
+  --band-green:#2c4223;--band-green-ink:#eef3e6;--band-quote:#2c2621;--band-quote-ink:#8fb8d6;
   --footer-bg:#141110;--footer-ink:#ece4d8;--footer-muted:#a89c8d;--footer-line:#352e28;--on-dark-accent:#c7d6a8;
   --hero-from:#1d1916;--hero-to:#1d1916;--arch:#2c2621;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
 }
 /* Paper grain only in light mode; dark mode stays flat. */
-:root[data-theme="dark"] body,:root[data-theme="dark"] .hero-visual::before{background-image:none}
+:root[data-theme="dark"] body,:root[data-theme="dark"] .hero-visual::before,:root[data-theme="dark"] .triage{background-image:none}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg) url("assets/paper-texture.jpg");background-blend-mode:multiply;color:var(--ink);font:18px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
@@ -56,7 +56,7 @@ main{flex:1}
 .site-header{width:100%;max-width:var(--wide);margin:0 auto;padding:22px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:inline-flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
 .brand:hover{color:var(--ink)}
-.brand-mark{color:var(--marigold);flex:none}
+.brand-mark{color:var(--logo);flex:none}
 .brand-copy{font:600 22px/1.05 var(--serif);white-space:nowrap}
 .brand-sub{display:block;font:inherit;color:inherit}
 .main-nav{display:flex;align-items:center;gap:26px;font-size:16px}
@@ -103,11 +103,11 @@ main{flex:1}
 @keyframes hero-settle{from{opacity:0;transform:rotate(4deg) translateY(16px)}}
 /* Phones: the painting becomes a small tilted thumbnail beside the headline. */
 @media(max-width:800px){
-  .home-page .hero{grid-template-columns:minmax(0,1fr) 112px;grid-template-areas:"eyebrow eyebrow" "title art" "intro intro" "actions actions" "verse verse";gap:0 16px;padding-top:28px;padding-bottom:56px}
+  .home-page .hero{grid-template-columns:minmax(0,1fr) 124px;grid-template-areas:"eyebrow eyebrow" "title art" "intro intro" "actions actions" "verse verse";gap:0 16px;padding-top:28px;padding-bottom:56px}
   .hero-copy{display:contents}
   .hero-copy>.eyebrow{grid-area:eyebrow}.hero-copy>h1{grid-area:title;margin:10px 0 18px;font-size:clamp(32px,8.6vw,44px)}
   .hero-copy>.intro{grid-area:intro;margin-top:0;min-width:0}.hero-copy>.actions{grid-area:actions;margin-top:4px}.hero-copy>.hero-verse{grid-area:verse;margin-top:36px}
-  .hero-visual{grid-area:art;align-self:center;max-width:none;padding:14px 4px 0 10px}
+  .hero-visual{grid-area:art;align-self:start;max-width:none;padding:14px 4px 0 10px}
   .hero-visual::before{left:16px;right:-6px;top:0;bottom:18px}
   .hero-art{max-width:none}.hero-art img{border-width:5px}.hero-art figcaption{display:none}
 }
@@ -134,8 +134,8 @@ main{flex:1}
 .subscribe h2{margin:6px 0 10px}
 .subscribe p{margin:0;color:var(--band-green-ink)}
 .subscribe .eyebrow{color:var(--band-green-ink);opacity:.85}
-.site-footer .subscribe-form .button,.subscribe .button{background:var(--marigold);border-color:var(--marigold);color:var(--on-marigold)}
-.site-footer .subscribe-form .button:hover,.subscribe .button:hover{background:var(--marigold-hover);border-color:var(--marigold-hover);color:var(--on-marigold)}
+.hero .actions .button:not(.outline),.site-footer .subscribe-form .button,.subscribe .button{background:#c27a0e;border-color:#c27a0e;color:#fff}
+.hero .actions .button:not(.outline):hover,.site-footer .subscribe-form .button:hover,.subscribe .button:hover{background:#a9670b;border-color:#a9670b;color:#fff}
 .subscribe-row input{border-color:transparent}
 .prose .subscribe{margin:32px 0 40px;grid-template-columns:1fr;gap:20px;padding:32px}
 .prose .subscribe h2{font-size:30px;margin-top:6px}
@@ -160,9 +160,9 @@ main{flex:1}
 .wide-photo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 
 /* Home: triage quote, voices, latest */
-.home-page .triage{max-width:none;background:var(--band-terra);color:var(--band-terra-ink);padding:80px var(--gutter);text-align:center}
+.home-page .triage{max-width:none;background:var(--band-quote) url("assets/paper-texture.jpg");background-blend-mode:multiply;color:var(--band-quote-ink);padding:80px var(--gutter);text-align:center}
 .triage blockquote{max-width:880px;margin:0 auto;font-size:clamp(24px,3vw,34px);line-height:1.35}
-.triage .cite{font:600 15px var(--sans);letter-spacing:.01em;color:var(--band-terra-ink);margin:24px 0 0}
+.triage .cite{font:600 15px var(--sans);letter-spacing:.01em;color:var(--muted);margin:24px 0 0}
 .voices{padding-top:88px;padding-bottom:40px}
 .voices ul{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .voices li{border-top:3px solid var(--marigold);padding-top:20px}
@@ -209,6 +209,13 @@ main{flex:1}
 .shepherd img{display:block;border:6px solid #fff;box-shadow:var(--shadow)}
 .shepherd h2{margin-top:8px}
 @media(max-width:700px){.shepherd{grid-template-columns:1fr}.shepherd figure{max-width:240px}}
+.field-notes{display:grid;gap:18px;margin-top:24px}
+.field-notes>p{margin:6px 0 0}
+.field-notes blockquote{position:relative;margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 28px 24px 64px;font-size:19px;line-height:1.6}
+.field-notes blockquote::before{content:"\201C";position:absolute;left:22px;top:12px;font:600 52px/1 var(--serif);color:var(--marigold)}
+.field-notes blockquote p{margin:0}
+.field-notes cite{display:block;margin-bottom:6px;font:600 15px var(--sans);font-style:normal;letter-spacing:.01em;color:var(--label)}
+@media(max-width:600px){.field-notes blockquote{padding:20px 20px 20px 50px;font-size:18px}.field-notes blockquote::before{left:16px;font-size:44px}}
 blockquote.pull{margin:48px 0 0;padding-left:24px;border-left:3px solid var(--marigold);font-size:24px;line-height:1.4}
 blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01em;color:var(--label);margin-top:12px;font-style:normal}
 
@@ -262,5 +269,7 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .site-footer .brand-mark{color:var(--marigold)}
 .footer-bottom{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--footer-line);padding-top:20px;color:var(--footer-muted);font-size:14px}
 .footer-bottom p{margin:0}
-.theme-toggle{background:none;border:1px solid var(--footer-line);border-radius:99px;color:var(--footer-ink);padding:8px;display:inline-flex;cursor:pointer}
+.footer-actions{display:flex;align-items:center;gap:10px}
+.theme-toggle,.footer-social{background:none;border:1px solid var(--footer-line);border-radius:99px;color:var(--footer-ink);padding:8px;display:inline-flex;cursor:pointer}
+.footer-social:hover{color:var(--marigold);border-color:var(--marigold)}
 @media(max-width:800px){.site-footer{grid-template-columns:1fr;gap:28px}}
