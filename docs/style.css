@@ -278,6 +278,6 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .give-how{grid-area:how}
 .give-how p:first-child{margin-top:0}
 .give-photo{grid-area:photo;margin:0}
-.give-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px}
+.give-photo img{display:block;width:100%;aspect-ratio:6/5;object-fit:cover;border-radius:12px}
 .give-photo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
-@media(max-width:700px){.give-split{grid-template-columns:1fr;grid-template-areas:"intro" "photo" "how"}.give-photo{margin:8px 0 28px}.give-photo img{aspect-ratio:4/3}}
+@media(max-width:700px){.give-split{grid-template-columns:1fr;grid-template-areas:"intro" "photo" "how"}.give-photo{margin:8px 0 28px}.give-photo img{aspect-ratio:auto}}
