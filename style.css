@@ -281,3 +281,7 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .give-photo img{display:block;width:100%;aspect-ratio:6/5;object-fit:cover;border-radius:12px}
 .give-photo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 @media(max-width:700px){.give-split{grid-template-columns:1fr;grid-template-areas:"intro" "photo" "how"}.give-photo{margin:8px 0 28px}.give-photo img{aspect-ratio:auto}}
+.about-lead{float:right;width:300px;margin:6px 0 24px 40px}
+.about-lead img{display:block;width:100%;height:auto;border-radius:12px}
+.about-lead figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+@media(max-width:700px){.about-lead{float:none;width:auto;margin:0 0 28px}.about-lead img{aspect-ratio:4/3;object-fit:cover;object-position:50% 60%}}
