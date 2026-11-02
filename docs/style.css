@@ -116,7 +116,10 @@ main{flex:1}
 .home-page .calling{max-width:none;text-align:center;background:var(--footer-bg);color:var(--footer-ink);padding:88px var(--gutter)}
 .calling .eyebrow{color:var(--marigold)}
 .calling h2,.calling p{max-width:var(--read);margin-left:auto;margin-right:auto}
-.calling>p:last-of-type{color:var(--footer-muted);font-size:20px}
+.calling h2+p{color:var(--footer-muted);font-size:20px}
+.calling-more{margin-top:20px}
+.calling-more a{color:var(--marigold);font-weight:600}
+.calling-more a:hover{color:var(--marigold-hover)}
 .calling-photo{margin:48px auto 0;max-width:960px}
 .calling-photo img{display:block;width:100%;border-radius:14px}
 .calling-photo figcaption{font:italic 15px var(--serif);color:var(--footer-muted);margin-top:12px}
@@ -126,6 +129,7 @@ main{flex:1}
 .pillar-photo{display:block;width:calc(100% + 72px);max-width:none;margin:-36px -36px 28px;aspect-ratio:16/9;object-fit:cover}
 .pillars h3{font-size:30px}
 .pillars a{font-weight:600}
+.pillar-links{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0}
 @media(max-width:800px){.pillars{grid-template-columns:1fr}.pillars article{padding:28px 24px}.pillar-photo{width:calc(100% + 48px);margin:-28px -24px 24px}}
 
 /* Email sign-up: the primary call to action */
@@ -133,6 +137,9 @@ main{flex:1}
 .home-page main>section.subscribe{width:calc(100% - 2*var(--gutter));max-width:calc(var(--wide) - 2*var(--gutter));margin-bottom:88px;padding:44px 48px}
 .subscribe h2{margin:6px 0 10px}
 .subscribe p{margin:0;color:var(--band-green-ink)}
+.subscribe p+p,.subscribe-list+p{margin-top:12px}
+.subscribe-list{margin:12px 0 0;padding-left:20px;line-height:1.55}
+.subscribe-list li+li{margin-top:8px}
 .subscribe .eyebrow{color:var(--band-green-ink);opacity:.85}
 .hero .actions .button:not(.outline),.site-footer .subscribe-form .button,.subscribe .button{background:#c27a0e;border-color:#c27a0e;color:#fff}
 .hero .actions .button:not(.outline):hover,.site-footer .subscribe-form .button:hover,.subscribe .button:hover{background:#a9670b;border-color:#a9670b;color:#fff}
@@ -191,6 +198,18 @@ main{flex:1}
 .pagehead{padding-top:48px}
 .pagehead h1{font-size:clamp(38px,5.4vw,60px)}
 .prose{padding-bottom:96px}
+/* Conferences: sidebar of section links on desktop; the page fills the header's width. */
+.toc{display:none}
+.toc-main h2{scroll-margin-top:24px}
+@media(min-width:1000px){
+  .toc-layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;max-width:var(--wide);margin:auto;padding:0 var(--gutter)}
+  .toc-main .pagehead,.toc-main .prose{max-width:none;padding-left:0;padding-right:0}
+  .toc{display:block;position:sticky;top:0;align-self:start;padding-top:48px}
+  .toc-title{font:600 15px/1.4 var(--sans);color:var(--label);margin:0 0 12px}
+  .toc ul{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+  .toc a{display:block;padding:6px 0 6px 16px;margin-left:-1px;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:16px;line-height:1.4}
+  .toc a:hover{color:var(--ink);border-left-color:var(--accent)}
+}
 .prose h2{font-size:32px;margin-top:48px}
 .prose h3{margin-top:36px}
 .prose div{margin-bottom:1.2em}
@@ -266,6 +285,9 @@ blockquote.pull cite{display:block;font:600 15px var(--sans);letter-spacing:.01e
 .site-footer .brand-mark{color:var(--marigold)}
 .footer-bottom{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--footer-line);padding-top:20px;color:var(--footer-muted);font-size:14px}
 .footer-bottom p{margin:0}
+.footer-credit{color:inherit;font-size:13px;opacity:.75;white-space:nowrap}
+.footer-credit:hover{color:var(--marigold);opacity:1}
+@media(max-width:600px){.footer-sep{display:none}.footer-credit{display:block;margin-top:4px}}
 .footer-actions{display:flex;align-items:center;gap:10px}
 .theme-toggle,.footer-social{background:none;border:1px solid var(--footer-line);border-radius:99px;color:var(--footer-ink);padding:8px;display:inline-flex;cursor:pointer}
 .footer-social:hover{color:var(--marigold);border-color:var(--marigold)}
