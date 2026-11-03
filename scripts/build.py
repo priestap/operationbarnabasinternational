@@ -120,8 +120,9 @@ def shell(path,title,body,description,head=''):
  n=iter(range(1,100))
  doc=re.sub(r'<svg class="brand-mark".*?</svg>',lambda m:m.group(0).replace('__CROOK__',f'crook-{next(n)}'),doc,flags=re.S)
  return doc.replace('__ROOT__','../'*len(path.parts) or './')
+PAGES=[]  # every real page, for sitemap.xml (redirect stubs and the 404 are left out)
 def write(path,title,body,description='Encouraging and equipping indigenous pastors and their families around the world. A partner ministry of Advancing Native Missions.',head=''):
- p=OUT/path/'index.html';p.parent.mkdir(parents=True,exist_ok=True);p.write_text(shell(path,title,body,description,head))
+ p=OUT/path/'index.html';p.parent.mkdir(parents=True,exist_ok=True);p.write_text(shell(path,title,body,description,head));PAGES.append(path)
 def article(title,body,kicker=SITE):
  return f'<section class="pagehead"><p class="eyebrow">{kicker}</p><h1>{title}</h1></section><article class="prose">{body}</article>'
 # Same as article(), plus a desktop sidebar linking to each section's h2, grouped into upcoming and past.
@@ -136,12 +137,16 @@ def toc_article(title,body,kicker=SITE):
  return f'<div class="toc-layout"><section class="pagehead"><p class="eyebrow">{kicker}</p><h1>{title}</h1></section><nav class="toc" aria-label="On this page"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>{nav}</nav><article class="prose">{body}</article></div>'
 
 # Posts keep their original root-level WordPress permalinks.
-TITLE_FIXES={'an-anniversary-of-sorts':'An Anniversary of Sorts','from-our-kenyan-partner-timothy-kinyua':'From Our Kenyan Partner'}
+TITLE_FIXES={'from-our-kenyan-partner-timothy-kinyua':'From Our Kenyan Partner'}
+# WordPress posts left off the site: personal letters (health, family, plans), not ministry news. Their old addresses redirect.
+REMOVED={'an-anniversary-of-sorts'}
 # Local partners aren't named on the site, so this post moves to a slug without the name (the old address redirects).
 SLUG_FIXES={'from-our-kenyan-partner-timothy-kinyua':'from-our-kenyan-partner'}
 entries=[]
 for i in posts:
- slug=val(i,'wp:post_name');title=TITLE_FIXES.get(slug,html.unescape(val(i,'title')).rstrip(':'));slug=SLUG_FIXES.get(slug,slug)
+ slug=val(i,'wp:post_name')
+ if slug in REMOVED: continue
+ title=TITLE_FIXES.get(slug,html.unescape(val(i,'title')).rstrip(':'));slug=SLUG_FIXES.get(slug,slug)
  cat=next((c.text for c in i.findall('category') if c.get('domain')=='category'),'News')
  date=datetime.strptime(val(i,'wp:post_date')[:10],'%Y-%m-%d')
  entries.append(dict(id=val(i,'wp:post_id'),slug=slug,title=title,cat=cat,date=date,body=clean(val(i,'content:encoded'))))
@@ -217,11 +222,15 @@ write(Path('.'),'Home',f'''<section class="hero"><div class="hero-copy"><p class
 (OUT/'404.html').write_text(shell(Path('.'),'Page not found',article('Page not found.','<p class="intro">Sorry, we couldn’t find that page.</p><p><a class="button" href="__ROOT__">Go to the homepage</a></p>','404'),'Page not found.').replace('href="./','href="/').replace('src="./','src="/'))
 
 # Old WordPress paths that moved get small redirect pages (GitHub Pages has no server redirects).
-MOVED={'about/contact':'contact/','about/donate':'donate/','home':'','photos':FACEBOOK,'category/devotionals':'updates/#devotionals','category/news':'updates/#news','devotionals-test':'updates/','sample-page':'','from-our-kenyan-partner-timothy-kinyua':'from-our-kenyan-partner/'}
+MOVED={'about/contact':'contact/','about/donate':'donate/','home':'','photos':FACEBOOK,'category/devotionals':'updates/#devotionals','category/news':'updates/#news','devotionals-test':'updates/','sample-page':'','from-our-kenyan-partner-timothy-kinyua':'from-our-kenyan-partner/','an-anniversary-of-sorts':'updates/'}
 for old,target in MOVED.items():
  depth=len(Path(old).parts); href=target if target.startswith('http') else '../'*depth+target
  p=OUT/old/'index.html';p.parent.mkdir(parents=True,exist_ok=True)
  p.write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting…</title><meta name="robots" content="noindex"><link rel="canonical" href="{target if target.startswith("http") else DOMAIN+"/"+target}"><meta http-equiv="refresh" content="0; url={href}"></head><body><p>This page has moved: <a href="{href}">continue</a>.</p></body></html>')
 unmatched=[pat.pattern for pat,_ in NORMAL_CASE if not any(pat.search(val(i,'content:encoded')) for i in posts)]
 if unmatched: raise ValueError(f'All-caps phrases not found in the export: {unmatched}')
+lastmod={e['slug']:e['date'] for e in entries}
+urls=''.join(f'<url><loc>{DOMAIN}/{"" if str(pg)=="." else f"{pg}/"}</loc>'+(f'<lastmod>{lastmod[str(pg)]:%Y-%m-%d}</lastmod>' if str(pg) in lastmod else '')+'</url>' for pg in PAGES)
+(OUT/'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
+(OUT/'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n')
 print(f'Built {len(entries)} posts, {len(MOVED)} legacy redirects, and supporting pages in {OUT}')

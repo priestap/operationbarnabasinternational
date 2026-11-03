@@ -12,3 +12,4 @@ source-photos/
 # Only web-ready kebab-case photos are tracked; anything else dropped in assets/photos/ stays local.
 assets/photos/*
 !assets/photos/[a-z]*-*.jpg
+!docs/sitemap.xml
