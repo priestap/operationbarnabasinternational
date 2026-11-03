@@ -125,16 +125,26 @@ def write(path,title,body,description='Encouraging and equipping indigenous past
  p=OUT/path/'index.html';p.parent.mkdir(parents=True,exist_ok=True);p.write_text(shell(path,title,body,description,head));PAGES.append(path)
 def article(title,body,kicker=SITE):
  return f'<section class="pagehead"><p class="eyebrow">{kicker}</p><h1>{title}</h1></section><article class="prose">{body}</article>'
-# Same as article(), plus a desktop sidebar linking to each section's h2, grouped into upcoming and past.
-def toc_article(title,body,kicker=SITE):
+TOC_CALENDAR='<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'
+TOC_LIST='<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01" stroke-width="2.6"/>'
+# Same as article(), plus a desktop sidebar linking to each section's h2. By default the sections are the schedule's
+# <section class="year …"> blocks, grouped into upcoming and past; with a label, every h2 is listed under that label.
+# `names` gives a section a shorter sidebar link than its heading.
+def toc_article(title,body,kicker=SITE,label=None,icon=TOC_CALENDAR,names={}):
  groups={'Upcoming Conferences':[],'Past Conferences':[]}
  def anchor(m):
   cls,gap,heading=m.groups();text=re.sub(r'<.*?>','',heading);slug=re.sub(r'[^a-z0-9]+','-',text.lower()).strip('-')
   groups['Upcoming Conferences' if 'upcoming' in cls else 'Past Conferences'].append(f'<li><a href="#{slug}">{text}</a></li>')
   return f'<section class="{cls}">{gap}<h2 id="{slug}">{heading}</h2>'
- body=re.sub(r'<section class="([^"]*)">(\s*)<h2>(.*?)</h2>',anchor,body)
+ def plain(m):
+  attrs,heading=m.groups();text=re.sub(r'<.*?>','',heading);existing=re.search(r'id="([^"]+)"',attrs)
+  slug=existing.group(1) if existing else re.sub(r'[^a-z0-9]+','-',text.lower()).strip('-')
+  groups[label].append(f'<li><a href="#{slug}">{names.get(text,text)}</a></li>')
+  return m.group(0) if existing else f'<h2 id="{slug}"{attrs}>{heading}</h2>'
+ if label: groups={label:[]};body=re.sub(r'<h2([^>]*)>(.*?)</h2>',plain,body)
+ else: body=re.sub(r'<section class="([^"]*)">(\s*)<h2>(.*?)</h2>',anchor,body)
  nav=''.join(f'<p class="toc-title">{label}</p><ul>{"".join(links)}</ul>' for label,links in groups.items() if links)
- return f'<div class="toc-layout"><section class="pagehead"><p class="eyebrow">{kicker}</p><h1>{title}</h1></section><nav class="toc" aria-label="On this page"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>{nav}</nav><article class="prose">{body}</article></div>'
+ return f'<div class="toc-layout"><section class="pagehead"><p class="eyebrow">{kicker}</p><h1>{title}</h1></section><nav class="toc" aria-label="On this page"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{icon}</svg></span>{nav}</nav><article class="prose">{body}</article></div>'
 
 # Posts keep their original root-level WordPress permalinks.
 TITLE_FIXES={'from-our-kenyan-partner-timothy-kinyua':'From Our Kenyan Partner'}
@@ -198,7 +208,7 @@ for para in re.findall(r'<p>(.*?)</p>',field,flags=re.S):
  notes.append(f'<blockquote>{label}<p>{quote}</p></blockquote>')
  if post: notes.append(f'<p>{post}</p>')
 about=intro+'<h2>From the field</h2>\n<div class="field-notes">'+'\n'.join(notes)+'</div>'
-write(Path('about'),'About',article('Coming alongside the faceless and forgotten.','<div class="about-visual"><figure class="hero-art"><img src="__ROOT__assets/faithful-shepherd.jpg" alt="Painting of a young shepherd holding a staff and a Bible, a dove above and sheep behind him" width="520" height="693"><figcaption>The Faithful Shepherd<br>by Robin Harding Smith<br><a href="#shepherd-title">What the painting means ↓</a></figcaption></figure></div>'+about.replace('<h2>How OBI began</h2>\n','<h2>How OBI began</h2>\n<figure class="portrait"><img src="__ROOT__assets/jerry-harding.jpg" alt="Jerry Harding" width="213" height="320" loading="lazy"><figcaption>Jerry Harding</figcaption></figure>',1)+'<figure class="wide-photo"><img src="__ROOT__assets/photos/conference-group.jpg" alt="A large conference group gathered in front of a green, flower-draped stage" width="1000" height="750" loading="lazy"><figcaption>Gathered together at an OBI conference</figcaption></figure>'+SHEPHERD,'About OBI'),'Since 1996, Operation Barnabas International has encouraged indigenous pastors and their wives through conferences, encounters, and advocacy.')
+write(Path('about'),'About',toc_article('Coming alongside the faceless and forgotten.','<div class="about-visual"><figure class="hero-art"><img src="__ROOT__assets/faithful-shepherd.jpg" alt="Painting of a young shepherd holding a staff and a Bible, a dove above and sheep behind him" width="520" height="693"><figcaption>The Faithful Shepherd<br>by Robin Harding Smith<br><a href="#shepherd-title">What the painting means ↓</a></figcaption></figure></div>'+about.replace('<h2>How OBI began</h2>\n','<h2>How OBI began</h2>\n<figure class="portrait"><img src="__ROOT__assets/jerry-harding.jpg" alt="Jerry Harding" width="213" height="320" loading="lazy"><figcaption>Jerry Harding</figcaption></figure>',1).replace('<h2>From the field</h2>\n','<figure class="wide-photo"><img src="__ROOT__assets/photos/conference-group.jpg" alt="A large conference group gathered in front of a green, flower-draped stage" width="1000" height="750" loading="lazy"><figcaption>Gathered together at an OBI conference</figcaption></figure><h2>From the field</h2>\n',1)+SHEPHERD,'About OBI',label='On this page',icon=TOC_LIST,names={'From the field':'Testimonials','The Faithful Shepherd':'About the painting'}),'Since 1996, Operation Barnabas International has encouraged indigenous pastors and their wives through conferences, encounters, and advocacy.')
 
 conferences=re.sub(r'<!--.*?-->','',(ROOT/'conferences.html').read_text(),flags=re.S)
 # Mark a section <section class="year upcoming"> when it lists future dates; otherwise the page presents recent work.
