@@ -126,6 +126,8 @@ main{flex:1}
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding-top:88px;padding-bottom:88px}
 .pillars article{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:36px}
 .pillars article{overflow:hidden}
+.pillars-head{grid-column:1/-1;margin-bottom:-4px}
+.pillars-head h2{margin-bottom:0}
 .pillar-photo{display:block;width:calc(100% + 72px);max-width:none;margin:-36px -36px 28px;aspect-ratio:16/9;object-fit:cover}
 .pillars h3{font-size:30px}
 .pillars a{font-weight:600}
