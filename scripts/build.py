@@ -152,15 +152,18 @@ for i in posts:
  entries.append(dict(id=val(i,'wp:post_id'),slug=slug,title=title,cat=cat,date=date,body=clean(val(i,'content:encoded'))))
 # Posts written after the WordPress era: posts/<slug>.txt with title/date/category lines, "---", then the body.
 # News posts there are paraphrases of Jerry's emails (personal details left out); devotionals there are his own words.
+# A news post drawn from something other than his letters says "source: other", so its note doesn't mention a letter.
 for f in sorted((ROOT/'posts').glob('*.txt')):
  head,body=f.read_text().split('\n---\n',1)
  meta=dict(line.split(':',1) for line in head.strip().splitlines())
  meta={k.strip():v.strip() for k,v in meta.items()}
- entries.append(dict(id=None,summary=meta.get('category','News')=='News',slug=f.stem,title=meta['title'],cat=meta.get('category','News'),date=datetime.strptime(meta['date'],'%Y-%m-%d'),body=clean(body)))
+ entries.append(dict(id=None,summary=meta.get('category','News')=='News' and meta.get('source','letter'),slug=f.stem,title=meta['title'],cat=meta.get('category','News'),date=datetime.strptime(meta['date'],'%Y-%m-%d'),body=clean(body)))
 entries.sort(key=lambda e:e['date'],reverse=True)
 for e in entries:
  meta=f'<p class="postmeta"><span class="chip chip-{re.sub(r"[^a-z]+","-",e["cat"].lower())}">{e["cat"]}</span> <time datetime="{e["date"]:%Y-%m-%d}">{e["date"]:%B %Y}</time></p>'
- note='<aside class="post-note"><p>This update is paraphrased from one of Jerry’s letters to supporters, with personal details left out for privacy. <a href="__ROOT__updates/#subscribe">Subscribe</a> to receive his letters in full.</p></aside>' if e.get('summary') else ''
+ note={'letter':'This update is paraphrased from one of Jerry’s letters to supporters, with personal details left out for privacy. <a href="__ROOT__updates/#subscribe">Subscribe</a> to receive his letters in full.',
+  'other':'Personal details and locations are left out of OBI’s updates for privacy. <a href="__ROOT__updates/#subscribe">Subscribe</a> to receive Jerry’s letters.'}.get(e.get('summary'),'')
+ note=f'<aside class="post-note"><p>{note}</p></aside>' if note else ''
  write(Path(e['slug']),e['title'],article(html.escape(e['title']),meta+e['body']+note+'<p class="back"><a href="__ROOT__updates/">← All updates</a></p>',e['cat']),excerpt(e['body'],25))
 def card(e):
  return f'<li class="card" data-cat="{re.sub(r"[^a-z]+","-",e["cat"].lower())}"><p class="postmeta"><span class="chip chip-{re.sub(r"[^a-z]+","-",e["cat"].lower())}">{e["cat"]}</span> <time datetime="{e["date"]:%Y-%m-%d}">{e["date"]:%B %Y}</time></p><h3><a href="__ROOT__{e["slug"]}/">{html.escape(e["title"])}</a></h3><p>{excerpt(e["body"])}</p></li>'
