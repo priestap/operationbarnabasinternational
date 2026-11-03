@@ -4,7 +4,7 @@
   --bg:#faf7f2;--surface:#fff;--sand:#f2ede4;--ink:#2b2622;--muted:#6b5f55;
   --accent:#2e5b7a;--accent-hover:#234a65;--flame:#2e5b7a;--label:#3b5a2f;--line:#e7e0d4;
   --button:#3b5a2f;--button-hover:#2f4a25;--on-button:#fff;
-  --marigold:#e59a1d;--marigold-hover:#cf8512;--logo:#c27a0e;--on-marigold:#2b2622;
+  --marigold:#e59a1d;--marigold-hover:#cf8512;--chip-devotional-ink:#8a5208;--logo:#c27a0e;--on-marigold:#2b2622;
   --band-green:#3b5a2f;--band-green-ink:#f6f1e6;--band-quote:#f1e6d4;--band-quote-ink:#2e5b7a;
   --footer-bg:#2b2622;--footer-ink:#ece4d8;--footer-muted:#b3a797;--footer-line:#453d36;--on-dark-accent:#c7d6a8;
   --hero-from:#faf7f2;--hero-to:#faf7f2;--arch:#f1e6d4;--shadow:0 18px 40px -18px rgba(60,35,15,.45);
@@ -15,7 +15,7 @@
   --bg:#1d1916;--surface:#27211d;--sand:#2e2722;--ink:#f1e9de;--muted:#b8ab9b;
   --accent:#8fb8d6;--accent-hover:#b0cde3;--flame:#8fb8d6;--label:#9cc27f;--line:#3d342d;
   --button:#9cc27f;--button-hover:#b5d49d;--on-button:#1d1916;
-  --marigold:#f0a830;--marigold-hover:#f5bf62;--logo:#f0a830;--on-marigold:#1d1916;
+  --marigold:#f0a830;--marigold-hover:#f5bf62;--chip-devotional-ink:#f0a830;--logo:#f0a830;--on-marigold:#1d1916;
   --band-green:#2c4223;--band-green-ink:#eef3e6;--band-quote:#2c2621;--band-quote-ink:#8fb8d6;
   --footer-bg:#141110;--footer-ink:#ece4d8;--footer-muted:#a89c8d;--footer-line:#352e28;--on-dark-accent:#c7d6a8;
   --hero-from:#1d1916;--hero-to:#1d1916;--arch:#2c2621;--shadow:0 18px 40px -18px rgba(0,0,0,.8);
@@ -133,7 +133,7 @@ main{flex:1}
 @media(max-width:800px){.pillars{grid-template-columns:1fr}.pillars article{padding:28px 24px}.pillar-photo{width:calc(100% + 48px);margin:-28px -24px 24px}}
 
 /* Email sign-up: the primary call to action */
-.subscribe{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;background:var(--band-green);color:var(--band-green-ink);border-radius:16px;padding:44px 48px}
+.subscribe{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center;background:var(--band-green);color:var(--band-green-ink);border-radius:16px;padding:44px 48px}
 .home-page main>section.subscribe{width:calc(100% - 2*var(--gutter));max-width:calc(var(--wide) - 2*var(--gutter));margin-bottom:88px;padding:44px 48px}
 .subscribe h2{margin:6px 0 10px}
 .subscribe p{margin:0;color:var(--band-green-ink)}
@@ -149,18 +149,39 @@ main{flex:1}
 .subscribe-eyebrow{display:flex;align-items:center;gap:12px}
 .subscribe .subscribe-eyebrow{opacity:1}
 .subscribe-icon{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--marigold);color:var(--on-marigold);transform:rotate(-6deg)}
+.subscribe.will-reveal>*{opacity:0;transform:translateY(10px)}
+.subscribe.will-reveal .subscribe-icon{opacity:0;transform:rotate(-24deg) scale(1.3)}
+.subscribe.revealed>*{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.subscribe.revealed>*+*{transition-delay:.12s}
+.subscribe.revealed .subscribe-icon{opacity:1;transform:rotate(-6deg);transition:opacity .3s ease .4s,transform .55s cubic-bezier(.3,1.4,.5,1) .4s}
 .subscribe-row input{padding-left:46px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a7d70' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3.5 6.5 8.5 6.5 8.5-6.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:16px center;background-size:20px}
 .hero .actions .button:not(.outline),.site-footer .subscribe-form .button,.subscribe .button{background:#c27a0e;border-color:#c27a0e;color:#fff}
 .hero .actions .button:not(.outline):hover,.site-footer .subscribe-form .button:hover,.subscribe .button:hover{background:#a9670b;border-color:#a9670b;color:#fff}
 .subscribe-row input{border-color:transparent}
 .prose .subscribe{margin:32px 0 40px;grid-template-columns:1fr;gap:20px;padding:32px}
 .prose .subscribe h2{font-size:30px;margin-top:6px}
+/* Updates page: a light sign-up strip that nods to the green band (badge, airmail trim) without its weight */
+.subscribe-strip{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);grid-template-areas:"icon title title" ". text form";gap:8px 20px;align-items:center;margin:28px 0 8px;padding:38px 32px 34px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.subscribe-strip::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:repeating-linear-gradient(-45deg,var(--marigold) 0 12px,transparent 12px 18px,var(--band-green) 18px 30px,transparent 30px 36px)}
+.subscribe-strip .subscribe-icon{grid-area:icon}
+.prose .subscribe-strip h2{grid-area:title;font:600 23px/1.3 var(--serif);margin:0}
+.subscribe-strip>p{grid-area:text}
+.subscribe-strip .subscribe-form{grid-area:form}
+.subscribe-strip p{margin:0;font-size:16px;color:var(--muted)}
+.prose .subscribe-strip div{margin-bottom:0}
+.subscribe-strip .subscribe-form .button{background:var(--button);border-color:var(--button);color:var(--on-button)}
+.subscribe-strip .subscribe-form .button:hover{background:var(--button-hover);border-color:var(--button-hover)}
+.subscribe-strip .subscribe-status{margin-top:6px!important}
+.subscribe-strip .subscribe-status:empty{min-height:0;margin:0!important}
+@media(max-width:800px){.subscribe-strip{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"icon title" ". text" "form form"}.subscribe-strip .subscribe-form{margin-top:12px}}
 .subscribe-row{display:flex;gap:10px}
 .subscribe-row input{flex:1;min-width:0;font:inherit;color:var(--ink);background-color:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px 12px 46px}
 .subscribe-status{min-height:1.4em;margin:10px 0 0!important;font-size:16px}
 .subscribe-status[data-state="success"]{color:inherit;font-weight:600}
 .subscribe-status[data-state="error"]{color:#b3261e}
 :root[data-theme="dark"] .subscribe-status[data-state="error"]{color:#f2a49b}
+/* Desktop band: the status line hangs below the field so the field itself centers against the text */
+@media(min-width:801px){.home-page .subscribe .subscribe-form{position:relative}.home-page .subscribe .subscribe-status{position:absolute;top:100%;left:0;right:0}}
 @media(max-width:800px){.subscribe,.home-page main>section.subscribe{grid-template-columns:1fr;gap:20px;padding:28px 24px}}
 @media(max-width:420px){.subscribe-row{flex-direction:column}.subscribe-row .button{justify-content:center}}
 
@@ -209,6 +230,9 @@ main{flex:1}
 .card p:last-child{margin:0;color:var(--muted);font-size:16px}
 .postmeta{margin:0;font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center}
 .chip{background:var(--sand);color:var(--label);font-weight:600;font-size:13px;letter-spacing:.01em;padding:3px 10px;border-radius:99px}
+/* Each category gets its own tint: News in slate blue, Devotionals in marigold */
+.chip-news{background:color-mix(in srgb,var(--accent) 13%,var(--surface));color:var(--accent)}
+.chip-devotionals{background:color-mix(in srgb,var(--marigold) 20%,var(--surface));color:var(--chip-devotional-ink)}
 
 /* Interior pages */
 .pagehead,.prose{max-width:calc(var(--prose) + 2*var(--gutter));margin:auto;padding-left:var(--gutter);padding-right:var(--gutter)}
@@ -238,8 +262,24 @@ main{flex:1}
 .prose li{margin-bottom:.5em}
 .prose .alignright{float:right;margin:6px 0 16px 28px;max-width:45%}
 .prose .cards{margin-top:32px;padding-left:0}
+/* Updates: heading with News / Devotionals tabs beside it */
+.updates-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 24px;margin:48px 0 20px}
+.updates-head h2{margin:0}
+.updates-head+.cards{margin-top:0}
+.filter-tabs{display:inline-flex;gap:4px;padding:4px;background:var(--sand);border-radius:99px}
+.filter-tabs[hidden]{display:none}
+.filter-tabs button{font:600 15px/1.2 var(--sans);color:var(--muted);background:transparent;border:0;border-radius:99px;padding:8px 16px;cursor:pointer;transition:background .2s,color .2s}
+.filter-tabs button:hover{color:var(--ink)}
+.filter-tabs button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(60,35,15,.18)}
+.filter-tabs button[data-filter="news"][aria-pressed="true"]{color:var(--accent)}
+.filter-tabs button[data-filter="devotionals"][aria-pressed="true"]{color:var(--chip-devotional-ink)}
+.filter-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card[hidden]{display:none}
 .postmeta+*{margin-top:28px}
 .back{margin-top:48px;clear:both}
+.post-note{clear:both;margin-top:40px;padding:16px 20px;border-left:3px solid var(--marigold);background:var(--surface);border-radius:0 10px 10px 0;font-size:16px;color:var(--muted)}
+.post-note p{margin:0}
+.post-note+.back{margin-top:32px}
 .portrait{float:right;margin:6px 0 20px 32px;width:180px}
 .portrait img{display:block;border-radius:10px}
 .portrait figcaption{font-size:14px;color:var(--muted);margin-top:8px}

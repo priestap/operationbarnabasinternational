@@ -17,9 +17,12 @@ MAILCHIMP='https://facebook.us14.list-manage.com/subscribe/post?u=92c342cbb799c4
 MAILCHIMP_HONEYPOT='b_92c342cbb799c4a03fe7f8831_76f34ed275'
 def subscribe_form(key):
  return f'''<form class="subscribe-form" action="{MAILCHIMP}" method="post" target="_blank"><label class="visually-hidden" for="subscribe-{key}">Email address</label><div class="subscribe-row"><input id="subscribe-{key}" type="email" name="EMAIL" autocomplete="email" placeholder="Your email address" required><button class="button" type="submit">Subscribe</button></div><div class="form-honeypot" aria-hidden="true"><input type="text" name="{MAILCHIMP_HONEYPOT}" tabindex="-1" value="" autocomplete="off"></div><p class="subscribe-status" role="status" aria-live="polite"></p></form>'''
-SUBSCRIBE_NOTE='<p>Devotionals, reports from the field, and prayer requests as conferences draw near—so you’ll know what to pray for, and when. Unsubscribe anytime.</p>'
+SUBSCRIBE_NOTE='<p>Devotionals, field reports, and prayer requests as conferences draw near. Unsubscribe anytime.</p>'
 def subscribe_band(key,note=SUBSCRIBE_NOTE):
  return f'<section class="subscribe" id="subscribe" aria-labelledby="subscribe-title-{key}"><div><p class="eyebrow subscribe-eyebrow"><span class="subscribe-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></span>Stay connected</p><h2 id="subscribe-title-{key}">Sign up for Jerry’s devotionals &amp; news</h2>{note}</div>{subscribe_form(key)}</section>'
+# A lighter sign-up for the Updates page: the band's envelope badge and airmail trim, without the heavy green box.
+def subscribe_strip(key):
+ return f'<section class="subscribe-strip" id="subscribe" aria-labelledby="subscribe-title-{key}"><span class="subscribe-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></span><h2 id="subscribe-title-{key}">Subscribe to Jerry’s devotionals &amp; news by email</h2><p>Prayer requests before each conference, reports after, and devotionals. Unsubscribe anytime.</p>{subscribe_form(key)}</section>'
 # Paste a Formspree endpoint (https://formspree.io/f/…) here to turn on the contact form.
 FORM_ENDPOINT='https://formspree.io/f/xzeekoyq'
 
@@ -133,26 +136,30 @@ def toc_article(title,body,kicker=SITE):
  return f'<div class="toc-layout"><section class="pagehead"><p class="eyebrow">{kicker}</p><h1>{title}</h1></section><nav class="toc" aria-label="On this page"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>{nav}</nav><article class="prose">{body}</article></div>'
 
 # Posts keep their original root-level WordPress permalinks.
-TITLE_FIXES={'an-anniversary-of-sorts':'An Anniversary of Sorts'}
+TITLE_FIXES={'an-anniversary-of-sorts':'An Anniversary of Sorts','from-our-kenyan-partner-timothy-kinyua':'From Our Kenyan Partner'}
+# Local partners aren't named on the site, so this post moves to a slug without the name (the old address redirects).
+SLUG_FIXES={'from-our-kenyan-partner-timothy-kinyua':'from-our-kenyan-partner'}
 entries=[]
 for i in posts:
- slug=val(i,'wp:post_name');title=TITLE_FIXES.get(slug,html.unescape(val(i,'title')).rstrip(':'))
+ slug=val(i,'wp:post_name');title=TITLE_FIXES.get(slug,html.unescape(val(i,'title')).rstrip(':'));slug=SLUG_FIXES.get(slug,slug)
  cat=next((c.text for c in i.findall('category') if c.get('domain')=='category'),'News')
  date=datetime.strptime(val(i,'wp:post_date')[:10],'%Y-%m-%d')
  entries.append(dict(id=val(i,'wp:post_id'),slug=slug,title=title,cat=cat,date=date,body=clean(val(i,'content:encoded'))))
 # Posts written after the WordPress era: posts/<slug>.txt with title/date/category lines, "---", then the body.
+# News posts there are paraphrases of Jerry's emails (personal details left out); devotionals there are his own words.
 for f in sorted((ROOT/'posts').glob('*.txt')):
  head,body=f.read_text().split('\n---\n',1)
  meta=dict(line.split(':',1) for line in head.strip().splitlines())
  meta={k.strip():v.strip() for k,v in meta.items()}
- entries.append(dict(id=None,slug=f.stem,title=meta['title'],cat=meta.get('category','News'),date=datetime.strptime(meta['date'],'%Y-%m-%d'),body=clean(body)))
+ entries.append(dict(id=None,summary=meta.get('category','News')=='News',slug=f.stem,title=meta['title'],cat=meta.get('category','News'),date=datetime.strptime(meta['date'],'%Y-%m-%d'),body=clean(body)))
 entries.sort(key=lambda e:e['date'],reverse=True)
 for e in entries:
- meta=f'<p class="postmeta"><span class="chip">{e["cat"]}</span> <time datetime="{e["date"]:%Y-%m-%d}">{e["date"]:%B %Y}</time></p>'
- write(Path(e['slug']),e['title'],article(html.escape(e['title']),meta+e['body']+'<p class="back"><a href="__ROOT__updates/">← All updates</a></p>',e['cat']),excerpt(e['body'],25))
+ meta=f'<p class="postmeta"><span class="chip chip-{re.sub(r"[^a-z]+","-",e["cat"].lower())}">{e["cat"]}</span> <time datetime="{e["date"]:%Y-%m-%d}">{e["date"]:%B %Y}</time></p>'
+ note='<aside class="post-note"><p>This update is paraphrased from one of Jerry’s letters to supporters, with personal details left out for privacy. <a href="__ROOT__updates/#subscribe">Subscribe</a> to receive his letters in full.</p></aside>' if e.get('summary') else ''
+ write(Path(e['slug']),e['title'],article(html.escape(e['title']),meta+e['body']+note+'<p class="back"><a href="__ROOT__updates/">← All updates</a></p>',e['cat']),excerpt(e['body'],25))
 def card(e):
- return f'<li class="card"><p class="postmeta"><span class="chip">{e["cat"]}</span> <time datetime="{e["date"]:%Y-%m-%d}">{e["date"]:%B %Y}</time></p><h3><a href="__ROOT__{e["slug"]}/">{html.escape(e["title"])}</a></h3><p>{excerpt(e["body"])}</p></li>'
-write(Path('updates'),'Updates',article('News &amp; devotionals','<p class="intro">Letters, devotionals, and reports from the field.</p>'+subscribe_band('updates','<p>Join the partners who carry OBI’s work in prayer. Jerry’s emails bring you:</p><ul class="subscribe-list"><li><strong>Prayer requests</strong> as each conference draws near: the pastors and wives who will gather, the teaching, and the team’s health and protection.</li><li><strong>Reports from the field</strong> afterward, so you can see how God answered and give thanks.</li><li><strong>Devotionals</strong> from God’s Word to encourage you in your own walk.</li></ul><p>Unsubscribe anytime.</p>')+'<ul class="cards">'+''.join(card(e) for e in entries)+'</ul>','From the field'),'Letters, devotionals, and reports from Operation Barnabas International.')
+ return f'<li class="card" data-cat="{re.sub(r"[^a-z]+","-",e["cat"].lower())}"><p class="postmeta"><span class="chip chip-{re.sub(r"[^a-z]+","-",e["cat"].lower())}">{e["cat"]}</span> <time datetime="{e["date"]:%Y-%m-%d}">{e["date"]:%B %Y}</time></p><h3><a href="__ROOT__{e["slug"]}/">{html.escape(e["title"])}</a></h3><p>{excerpt(e["body"])}</p></li>'
+write(Path('updates'),'Updates',article('News &amp; devotionals','<p class="intro">Letters, devotionals, and reports from the field.</p>'+subscribe_strip('updates')+'<div class="updates-head"><h2 id="recent-updates">Recent updates</h2><div class="filter-tabs" role="group" aria-label="Show" hidden><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="news" aria-pressed="false">News</button><button type="button" data-filter="devotionals" aria-pressed="false">Devotionals</button></div></div><ul class="cards" id="update-cards" aria-labelledby="recent-updates">'+''.join(card(e) for e in entries)+'</ul><script src="__ROOT__assets/updates-filter.js" defer></script>','From the field'),'Letters, devotionals, and reports from Operation Barnabas International.')
 
 shepherd=next(e for e in entries if e['slug']=='the-faithful-shepherd')
 symbols=re.search(r'<ul>.*?</ul>',shepherd['body'],re.S).group(0)
@@ -210,7 +217,7 @@ write(Path('.'),'Home',f'''<section class="hero"><div class="hero-copy"><p class
 (OUT/'404.html').write_text(shell(Path('.'),'Page not found',article('Page not found.','<p class="intro">Sorry, we couldn’t find that page.</p><p><a class="button" href="__ROOT__">Go to the homepage</a></p>','404'),'Page not found.').replace('href="./','href="/').replace('src="./','src="/'))
 
 # Old WordPress paths that moved get small redirect pages (GitHub Pages has no server redirects).
-MOVED={'about/contact':'contact/','about/donate':'donate/','home':'','photos':FACEBOOK,'category/devotionals':'updates/','category/news':'updates/','devotionals-test':'updates/','sample-page':''}
+MOVED={'about/contact':'contact/','about/donate':'donate/','home':'','photos':FACEBOOK,'category/devotionals':'updates/#devotionals','category/news':'updates/#news','devotionals-test':'updates/','sample-page':'','from-our-kenyan-partner-timothy-kinyua':'from-our-kenyan-partner/'}
 for old,target in MOVED.items():
  depth=len(Path(old).parts); href=target if target.startswith('http') else '../'*depth+target
  p=OUT/old/'index.html';p.parent.mkdir(parents=True,exist_ok=True)

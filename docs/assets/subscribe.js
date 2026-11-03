@@ -11,4 +11,15 @@
      }, 300);
    });
  });
+ // The first time the sign-up band scrolls into view, its contents rise in and the envelope badge settles like a stamp.
+ if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+   if (!entry.isIntersecting) return;
+   entry.target.classList.add('revealed');
+   observer.unobserve(entry.target);
+ }), { threshold: 0.35 });
+ document.querySelectorAll('.subscribe').forEach(band => {
+   band.classList.add('will-reveal');
+   observer.observe(band);
+ });
 })();
